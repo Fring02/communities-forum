@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/LoginDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/UserRolesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/UserWithRolesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/LoginId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/TokensBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/repository/LoginsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/filter/JwtAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/AuthenticationProviderImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/user/LoginDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/util/JwtUtilService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreatedDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserWithRolesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/users-service/users-service-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/users-service/users-service-dev.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2TbUR4g4pAyVliSxOsqma355CEO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;281f9681bb7eda4e77c9af5e3381d8e6&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cloud.authorizationservice.security.util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AuthorizationServiceApplication">
+    <configuration name="AuthorizationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="authorization-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.authorizationservice.AuthorizationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.configserver.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceDiscoveryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="service-discovery" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.servicediscovery.ServiceDiscoveryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsersServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="users-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.usersservice.UsersServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="" />
+      <created>1691311263339</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1691311263339</updated>
+      <workItem from="1691311264340" duration="66000" />
+      <workItem from="1691311392616" duration="97000" />
+      <workItem from="1691311512861" duration="113000" />
+      <workItem from="1691311636040" duration="4880000" />
+      <workItem from="1691468197235" duration="383000" />
+      <workItem from="1691468645324" duration="124000" />
+      <workItem from="1691468775538" duration="46000" />
+      <workItem from="1691492010221" duration="2662000" />
+      <workItem from="1691494713270" duration="175000" />
+      <workItem from="1691494895811" duration="2949000" />
+      <workItem from="1691498025496" duration="3751000" />
+      <workItem from="1691594224376" duration="1374000" />
+      <workItem from="1691665854410" duration="2950000" />
+      <workItem from="1691670172291" duration="8030000" />
+      <workItem from="1691727495552" duration="61000" />
+      <workItem from="1691739989976" duration="6210000" />
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/forum$UsersServiceApplication.ic" NAME="UsersServiceApplication Coverage Results" MODIFIED="1691468731522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

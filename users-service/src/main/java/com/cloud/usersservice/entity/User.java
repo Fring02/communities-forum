@@ -1,0 +1,43 @@
+package com.cloud.usersservice.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.Check;
+
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "users")
+@Check(constraints = "karma > 0")
+@Getter
+@Setter
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
+    private UUID id;
+    @Column(name = "firstName", nullable = false)
+    private String firstName;
+    @Column(name = "lastName", nullable = false)
+    private String lastName;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+    @Column(name = "userName", unique = true, nullable = false, length = 20)
+    private String userName;
+    @Column(name = "karma", nullable = false)
+    private int karma = 1;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "roles")
+    private List<String> roles;
+    @ManyToMany
+    private List<User> subscribers;
+    @ManyToMany(mappedBy = "subscribers", cascade = CascadeType.PERSIST)
+    private List<User> subscriberOf;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof User user)) return false;
+        return user.userName.equals(this.userName) && user.email.equals(this.email);
+    }
+}
