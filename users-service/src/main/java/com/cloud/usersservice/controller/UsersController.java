@@ -5,7 +5,8 @@ import com.cloud.usersservice.dto.user.UserCreateDto;
 import com.cloud.usersservice.dto.user.UserUpdateDto;
 import com.cloud.usersservice.dto.user.UsersListDto;
 import com.cloud.usersservice.dto.user.UsersPageDto;
-import com.cloud.usersservice.service.UserService;
+import com.cloud.usersservice.service.UsersService;
+import com.cloud.usersservice.service.impl.UsersServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -22,9 +23,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
-    private final UserService service;
+    private final UsersService service;
     private final Logger logger;
-    public UsersController(UserService service) {
+    public UsersController(UsersService service) {
         this.service = Objects.requireNonNull(service);
         logger = LoggerFactory.getLogger(UsersController.class);
     }
@@ -40,6 +41,11 @@ public class UsersController {
         int usersCount = users.size();
         return ResponseEntity.ok(new UsersListDto(users, usersCount));
     }
+    @GetMapping("/{id}/exists")
+    public ResponseEntity<Boolean> userExistsById(@PathVariable("id") String id){
+        if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(service.existsById(UUID.fromString(id)));
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String id){
         if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body("Id is invalid");
@@ -50,12 +56,12 @@ public class UsersController {
             logger.warn("Id is not of UUID format");
             return ResponseEntity.badRequest().body("Id is invalid");
         }
-        return ResponseEntity.ok(service.getById(uuid));
+        return ResponseEntity.of(service.getById(uuid));
     }
     @GetMapping("/username/{username}/roles")
     public ResponseEntity<?> getByUsername(@PathVariable String username){
         if(!StringUtils.hasLength(username)) return ResponseEntity.badRequest().body("Username is invalid");
-        return ResponseEntity.ok(service.getRolesByUsername(username));
+        return ResponseEntity.of(service.getRolesByUsername(username));
     }
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody @Valid UserCreateDto dto, HttpServletRequest request){

@@ -4,40 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/ApplicationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/LoginDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/UserRolesDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/dto/UserWithRolesDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/LoginId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/TokensBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/repository/LoginsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/filter/JwtAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/AuthenticationProviderImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/UserDetailsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/user/LoginDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/util/JwtUtilService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service-dev.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreatedDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserWithRolesDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/users-service/users-service-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/users-service/users-service-dev.properties" afterDir="false" />
+    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="Added Auth service: login, sign up, refresh, revoke features">
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/Community.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/DtoWithId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreatedDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostFullViewDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostViewDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostsListDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostsPageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Dislike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Like.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/id/DislikeId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/id/LikeId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/id/ViewId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/EntityExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/EntityNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/DislikesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/LikesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/PostsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/ViewsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/base/BaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/base/CrudService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/util/UsersRestClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UsersService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/base/CrudService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/impl/UsersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/util/DatabaseSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/DatabaseSeeder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +66,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Fring02&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="aa91c9b5-7f07-4e6a-99ef-092688ab6a3c" />
+        <option name="url" value="https://github.com/Fring02/microservices-forum.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
@@ -85,20 +112,27 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum/posts-service/src/main/java/com/cloud/postsservice/service&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;281f9681bb7eda4e77c9af5e3381d8e6&quot;
+    &quot;spring.configuration.checksum&quot;: &quot;5f01b486bdb65733cc51f97b62e64be1&quot;
   }
 }</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.cloud.postsservice.entity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Султан\IdeaProjects\forum\posts-service\src\main\java\com\cloud\postsservice\service" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cloud.postsservice.dto" />
       <recent name="com.cloud.authorizationservice.security.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthorizationServiceApplication">
+  <component name="RunManager" selected="Spring Boot.PostsServiceApplication">
     <configuration name="AuthorizationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="authorization-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.authorizationservice.AuthorizationServiceApplication" />
@@ -106,9 +140,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CommunitiesServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="communities-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.communitiesservice.CommunitiesServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="config-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.configserver.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostsServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="posts-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.postsservice.PostsServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -151,9 +199,42 @@
       <workItem from="1691665854410" duration="2950000" />
       <workItem from="1691670172291" duration="8030000" />
       <workItem from="1691727495552" duration="61000" />
-      <workItem from="1691739989976" duration="6210000" />
+      <workItem from="1691739989976" duration="6497000" />
+      <workItem from="1691855999693" duration="3179000" />
+      <workItem from="1691997889790" duration="10000" />
+      <workItem from="1692538480687" duration="5362000" />
+      <workItem from="1692577680158" duration="3652000" />
+      <workItem from="1692631487591" duration="3298000" />
+      <workItem from="1692650010742" duration="2699000" />
+      <workItem from="1692823322335" duration="4218000" />
+      <workItem from="1692920618149" duration="66000" />
+      <workItem from="1692920731973" duration="6466000" />
     </task>
+    <task id="LOCAL-00001" summary="Added Auth service: login, sign up, refresh, revoke features">
+      <option name="closed" value="true" />
+      <created>1691746300947</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1691746300947</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Auth service: login, sign up, refresh, revoke features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Auth service: login, sign up, refresh, revoke features" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/forum$UsersServiceApplication.ic" NAME="UsersServiceApplication Coverage Results" MODIFIED="1691468731522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

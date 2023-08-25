@@ -1,6 +1,6 @@
 package com.cloud.usersservice.config;
 
-import com.cloud.usersservice.service.util.DatabaseSeeder;
+import com.cloud.usersservice.util.DatabaseSeeder;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

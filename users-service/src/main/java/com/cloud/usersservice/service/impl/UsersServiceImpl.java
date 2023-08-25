@@ -1,9 +1,10 @@
-package com.cloud.usersservice.service;
+package com.cloud.usersservice.service.impl;
 
 import com.cloud.usersservice.dto.subscribe.SubscriptionDto;
 import com.cloud.usersservice.dto.user.*;
 import com.cloud.usersservice.entity.User;
 import com.cloud.usersservice.repository.UsersRepository;
+import com.cloud.usersservice.service.UsersService;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -19,17 +20,18 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UsersServiceImpl implements UsersService {
     private final UsersRepository repository;
     private final Logger logger;
     private final ModelMapper mapper;
-    public UserService(UsersRepository repository, ModelMapper mapper) {
+    public UsersServiceImpl(UsersRepository repository, ModelMapper mapper) {
         this.repository = Objects.requireNonNull(repository);
         this.mapper = mapper;
-        logger = LoggerFactory.getLogger(UserService.class);
+        logger = LoggerFactory.getLogger(UsersServiceImpl.class);
     }
     @Transactional(readOnly = true)
     public List<UserViewDto> getAll(){
@@ -46,20 +48,24 @@ public class UserService {
         return repository.findBy(UserViewDto.class, pageable);
     }
     @Transactional(readOnly = true)
-    public UserViewDto getById(UUID id){
+    public Optional<UserFullViewDto> getById(UUID id) throws EntityNotFoundException {
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         logger.info("Fetching user by id " + id);
-        return repository.findById(id, UserFullViewDto.class)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("User with id %s not found", id)));
+        return repository.findById(id, UserFullViewDto.class);
     }
     @Transactional(readOnly = true)
-    public UserWithRolesDto getRolesByUsername(String username){
+    public boolean existsById(UUID id){
+        if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
+        return repository.existsById(id);
+    }
+    @Transactional(readOnly = true)
+    public Optional<UserWithRolesDto> getRolesByUsername(String username){
         if(!StringUtils.hasLength(username)) throw new IllegalArgumentException("Username is empty or invalid");
         logger.info("Fetching user roles by username " + username);
         return repository.findByUserName(username);
     }
     @Transactional
-    public UserCreatedDto create(UserCreateDto userDto){
+    public UserCreatedDto create(UserCreateDto userDto) throws EntityExistsException{
         Objects.requireNonNull(userDto);
         if(repository.existsByEmailOrUserNameAllIgnoreCase(userDto.getEmail(), userDto.getUserName()))
             throw new EntityExistsException("User with such credentials already exists");
@@ -70,7 +76,7 @@ public class UserService {
         return mapper.map(user, UserCreatedDto.class);
     }
     @Transactional
-    public void update(UserUpdateDto dto){
+    public void update(UserUpdateDto dto) throws EntityNotFoundException{
         if(dto.getId() == null) throw new IllegalArgumentException("Passed user id is invalid");
         repository.findById(dto.getId()).ifPresentOrElse(user -> {
             if(StringUtils.hasLength(dto.getUserName()) && !dto.getUserName().equals(user.getUserName()))
@@ -84,7 +90,7 @@ public class UserService {
         });
     }
     @Transactional
-    public void deleteById(UUID id){
+    public void deleteById(UUID id) throws EntityNotFoundException{
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         if(!repository.existsById(id)) throw new EntityNotFoundException("User with id " + id + " doesn't exist");
         logger.info("Deleting user by id " + id);

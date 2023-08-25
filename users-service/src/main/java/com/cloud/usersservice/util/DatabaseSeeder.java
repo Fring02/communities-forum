@@ -1,4 +1,4 @@
-package com.cloud.usersservice.service.util;
+package com.cloud.usersservice.util;
 
 import com.cloud.usersservice.entity.User;
 import com.cloud.usersservice.repository.UsersRepository;

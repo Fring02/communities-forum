@@ -100,12 +100,8 @@ public class AuthService {
         String oldAccessToken = tokens.getAccessToken(), oldRefreshToken = tokens.getRefreshToken();
         if(StringUtils.isBlank(oldAccessToken) || StringUtils.isBlank(oldRefreshToken))
             throw new BadCredentialsException("Access or refresh token are blank");
-        if(!repository.existsByRefreshToken(oldRefreshToken)){
-            var loginInfo = repository.findByUsername("Pillager01").get();
-            var ref = loginInfo.getRefreshToken();
-            var r = oldRefreshToken;
+        if(!repository.existsByRefreshToken(oldRefreshToken))
             throw new BadCredentialsException("Provided refresh token and user's token do not match");
-        }
         var userDetails = jwtService.validateTokenAndGetUser(oldAccessToken);
         var loginInfoOpt = repository.findByUsername(userDetails.getUsername());
         if(loginInfoOpt.isEmpty())
