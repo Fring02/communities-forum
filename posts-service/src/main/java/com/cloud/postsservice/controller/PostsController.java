@@ -1,9 +1,9 @@
 package com.cloud.postsservice.controller;
 
 import com.cloud.postsservice.dto.*;
-import com.cloud.postsservice.exception.EntityExistsException;
-import com.cloud.postsservice.exception.EntityNotFoundException;
 import com.cloud.postsservice.service.PostsService;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -19,7 +19,7 @@ public class View {
     private ViewId id;
     @MapsId("postId")
     @JoinColumn(name = "postId", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Post post;
     public View(UUID userId, long postId, Post post){
         this.id = new ViewId(userId, postId);

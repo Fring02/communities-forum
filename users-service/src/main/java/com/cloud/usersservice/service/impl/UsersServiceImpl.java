@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -34,7 +31,7 @@ public class UsersServiceImpl implements UsersService {
         logger = LoggerFactory.getLogger(UsersServiceImpl.class);
     }
     @Transactional(readOnly = true)
-    public List<UserViewDto> getAll(){
+    public Collection<UserViewDto> getAll(){
         logger.info("Fetching all users...");
         return repository.findBy(UserViewDto.class);
     }
@@ -58,6 +55,13 @@ public class UsersServiceImpl implements UsersService {
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         return repository.existsById(id);
     }
+
+    @Override
+    public Collection<UserViewDto> getByIds(Collection<UUID> ids) {
+        if(ids.isEmpty()) return Collections.emptyList();
+        return repository.findByIdIsIn(ids);
+    }
+
     @Transactional(readOnly = true)
     public Optional<UserWithRolesDto> getRolesByUsername(String username){
         if(!StringUtils.hasLength(username)) throw new IllegalArgumentException("Username is empty or invalid");

@@ -1,5 +1,6 @@
 package com.cloud.postsservice.service;
 
+import com.cloud.postsservice.client.UsersClient;
 import com.cloud.postsservice.dto.*;
 import com.cloud.postsservice.entity.Dislike;
 import com.cloud.postsservice.entity.Like;
@@ -8,16 +9,16 @@ import com.cloud.postsservice.entity.View;
 import com.cloud.postsservice.entity.id.DislikeId;
 import com.cloud.postsservice.entity.id.LikeId;
 import com.cloud.postsservice.entity.id.ViewId;
-import com.cloud.postsservice.exception.EntityExistsException;
-import com.cloud.postsservice.exception.EntityNotFoundException;
 import com.cloud.postsservice.exception.UserNotFoundException;
 import com.cloud.postsservice.repository.DislikesRepository;
 import com.cloud.postsservice.repository.LikesRepository;
 import com.cloud.postsservice.repository.PostsRepository;
 import com.cloud.postsservice.repository.ViewsRepository;
-import com.cloud.postsservice.util.UsersRestClient;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,10 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PostsServiceImpl implements PostsService {
@@ -38,11 +36,13 @@ public class PostsServiceImpl implements PostsService {
     private final LikesRepository likesRepository;
     private final DislikesRepository dislikesRepository;
     private final ModelMapper mapper;
-    private final UsersRestClient usersClient;
+    private final UsersClient usersClient;
     private final ViewsRepository viewsRepository;
+    @Value("${posts.karma.min}")
+    private int requiredKarma;
 
     public PostsServiceImpl(PostsRepository repository, LikesRepository likesRepository,
-                            DislikesRepository dislikesRepository, ModelMapper mapper, UsersRestClient usersClient,
+                            DislikesRepository dislikesRepository, ModelMapper mapper, UsersClient usersClient,
                             ViewsRepository viewsRepository) {
         this.repository = repository;
         this.likesRepository = likesRepository;
@@ -67,7 +67,13 @@ public class PostsServiceImpl implements PostsService {
             throw new IllegalArgumentException("Owner id is invalid");
         }
         if(repository.existsByTitle(dto.getTitle())) throw new EntityExistsException("Post with such title already exists");
-        if(!usersClient.userExists(ownerId)) throw new UserNotFoundException("User with id " + dto.getOwnerId() + " not found");
+        var userExistsResponse = usersClient.userExists(ownerId);
+        if(!userExistsResponse.getStatusCode().is2xxSuccessful()) throw new IllegalArgumentException("User fetch error");
+        if(Objects.equals(userExistsResponse.getBody(), false)) throw new UserNotFoundException("User with id " + dto.getOwnerId() + " not found");
+        var userHasEnoughKarmaResponse = usersClient.getUserRoles(ownerId);
+        if(!userHasEnoughKarmaResponse.getStatusCode().is2xxSuccessful()) throw new IllegalArgumentException("User fetch error");
+        if(userHasEnoughKarmaResponse.getBody() < requiredKarma)
+            throw new IllegalArgumentException("User with id " + dto.getOwnerId() + " not found");
         Post post = mapper.map(dto, Post.class);
         post.setOwnerId(ownerId);
         post.setPostedAt(LocalDate.now());
@@ -77,7 +83,7 @@ public class PostsServiceImpl implements PostsService {
         return mapper.map(post, PostCreatedDto.class);
     }
     @Transactional(readOnly = true)
-    public List<PostViewDto> getAll(){
+    public Collection<PostViewDto> getAll(){
         return repository.findBy(PostViewDto.class);
     }
     @Transactional(readOnly = true)

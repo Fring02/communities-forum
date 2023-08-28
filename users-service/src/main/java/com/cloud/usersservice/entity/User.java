@@ -12,7 +12,17 @@ import java.util.UUID;
 @Check(constraints = "karma > 0")
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
+    public User(UUID id, String firstName, String lastName, String email, String userName, int karma, List<String> roles) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userName = userName;
+        this.karma = karma;
+        this.roles = roles;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)

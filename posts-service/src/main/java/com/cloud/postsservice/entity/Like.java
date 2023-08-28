@@ -19,7 +19,7 @@ public class Like {
     private LikeId id;
     @MapsId("postId")
     @JoinColumn(name = "postId", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Post post;
     public Like(UUID userId, long postId, Post post){
         this.id = new LikeId(userId, postId);

@@ -19,7 +19,7 @@ public class Dislike {
     private DislikeId id;
     @MapsId("postId")
     @JoinColumn(name = "postId", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Post post;
     public Dislike(UUID userId, long postId, Post post){
         this.id = new DislikeId(postId, userId);

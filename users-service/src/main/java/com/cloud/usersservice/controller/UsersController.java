@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,7 +31,8 @@ public class UsersController {
         logger = LoggerFactory.getLogger(UsersController.class);
     }
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestParam("page") Optional<Integer> pageOpt, @RequestParam("pageCount") Optional<Integer> pageCountOpt){
+    public ResponseEntity<?> getAll(@RequestParam("page") Optional<Integer> pageOpt,
+                                    @RequestParam("pageCount") Optional<Integer> pageCountOpt){
         if(pageOpt.isPresent() && pageCountOpt.isPresent()){
             int page = pageOpt.get(), pageCount = pageCountOpt.get();
             if(page <= 0 || pageCount <= 0) return ResponseEntity.badRequest().body("Page or page count must be greater than 0");
@@ -40,6 +42,12 @@ public class UsersController {
         var users = service.getAll();
         int usersCount = users.size();
         return ResponseEntity.ok(new UsersListDto(users, usersCount));
+    }
+    @GetMapping("/ids={ids}")
+    public ResponseEntity<?> getByIds(@PathVariable Collection<UUID> ids){
+        var users = service.getByIds(ids);
+        if(users.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new UsersListDto(users, users.size()));
     }
     @GetMapping("/{id}/exists")
     public ResponseEntity<Boolean> userExistsById(@PathVariable("id") String id){

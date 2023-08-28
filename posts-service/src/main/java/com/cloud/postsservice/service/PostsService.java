@@ -1,8 +1,8 @@
 package com.cloud.postsservice.service;
 
 import com.cloud.postsservice.dto.*;
-import com.cloud.postsservice.exception.EntityNotFoundException;
 import com.cloud.postsservice.service.base.CrudService;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.UUID;
 
