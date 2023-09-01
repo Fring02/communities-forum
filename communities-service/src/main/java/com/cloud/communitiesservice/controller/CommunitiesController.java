@@ -46,6 +46,11 @@ public class CommunitiesController {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         return ResponseEntity.of(service.getById(id));
     }
+    @GetMapping("/{id}/exists")
+    public ResponseEntity<Boolean> checkIfCommunityExists(@PathVariable long id){
+        if(id <= 0) return ResponseEntity.badRequest().body(false);
+        return ResponseEntity.ok(service.existsById(id));
+    }
     @PostMapping("/{id}/categories")
     public ResponseEntity<?> addCommunityCategories(@PathVariable("id") long id, @RequestBody String category){
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");

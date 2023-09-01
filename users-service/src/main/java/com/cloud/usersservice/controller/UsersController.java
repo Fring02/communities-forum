@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UsersController {
     private final UsersService service;
     private final Logger logger;
@@ -51,7 +51,7 @@ public class UsersController {
     }
     @GetMapping("/{id}/exists")
     public ResponseEntity<Boolean> userExistsById(@PathVariable("id") String id){
-        if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().build();
+        if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body(false);
         return ResponseEntity.ok(service.existsById(UUID.fromString(id)));
     }
     @GetMapping("/{id}")
@@ -65,6 +65,18 @@ public class UsersController {
             return ResponseEntity.badRequest().body("Id is invalid");
         }
         return ResponseEntity.of(service.getById(uuid));
+    }
+    @GetMapping("/{id}/karma")
+    public ResponseEntity<?> getKarmaByUserId(@PathVariable("id") String id){
+        if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body("Id is invalid");
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(id);
+        } catch (IllegalArgumentException e){
+            logger.warn("Id is not of UUID format");
+            return ResponseEntity.badRequest().body("Id is invalid");
+        }
+        return ResponseEntity.ok(service.getKarmaById(uuid));
     }
     @GetMapping("/username/{username}/roles")
     public ResponseEntity<?> getByUsername(@PathVariable String username){

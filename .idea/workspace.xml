@@ -4,83 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="major update for posts service, draft for communities service">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/UsersClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/config/ApplicationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/DtoWithId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunitiesListDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunitiesPageDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityCreatedDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityFullViewDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityFullViewWrapperDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityViewDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/community/CommunityWithCategoriesViewDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/member/MemberDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/member/MembersListDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/member/NewMemberDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/member/UserRolesDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/CommunityMember.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/CommunityMemberRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/CommunityPost.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/RoleType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/id/CommunityMemberId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/id/CommunityPostId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/exception/UserNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/repository/CommunitiesMembersRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/repository/CommunitiesPostsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/repository/CommunitiesRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/repository/CommunityRolesRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/repository/base/BaseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/base/CrudService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/util/DatabaseSeeder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/communities-service/communities-service-dev.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/communities-service/communities-service.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/UsersClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="add new member, add category, get by id rework, other new features for communities service, users service">
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/PostsClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/CategoryRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/CommunitiesClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/CategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/CategoryRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/CategoriesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/CategoriesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/CategoriesServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserKarmaDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/CommunitiesServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/CommunitiesServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/entity/Community.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/posts-service/posts-service.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/PostsServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/PostsServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/client/UsersClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/UsersClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/UsersClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostsListDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostsListDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Dislike.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Dislike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/EntityExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/EntityNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostUpdateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostViewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostViewDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/UserNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/base/BaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/base/BaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/DislikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/DislikesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/LikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/LikesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/PostsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/ViewsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/ViewsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/base/CrudService.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/base/CrudService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/util/UsersRestClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreatedDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserCreatedDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserFullViewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserFullViewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserWithRolesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserWithRolesDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UsersListDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UsersListDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UsersPageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UsersPageDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/base/BaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/base/BaseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UsersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/base/CrudService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/base/CrudService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/impl/UsersServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/DatabaseSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/DatabaseSeeder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +49,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -173,7 +131,7 @@
       <recent name="com.cloud.authorizationservice.security.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommunitiesServiceApplication">
+  <component name="RunManager" selected="Spring Boot.PostsServiceApplication">
     <configuration name="AuthorizationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="authorization-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.authorizationservice.AuthorizationServiceApplication" />
@@ -265,7 +223,11 @@
       <workItem from="1693141020475" duration="16000" />
       <workItem from="1693167409160" duration="191000" />
       <workItem from="1693176471980" duration="7255000" />
-      <workItem from="1693252681100" duration="7069000" />
+      <workItem from="1693252681100" duration="7225000" />
+      <workItem from="1693427879288" duration="7005000" />
+      <workItem from="1693445866138" duration="692000" />
+      <workItem from="1693446799777" duration="4246000" />
+      <workItem from="1693528910714" duration="3487000" />
     </task>
     <task id="LOCAL-00001" summary="Added Auth service: login, sign up, refresh, revoke features">
       <option name="closed" value="true" />
@@ -283,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692927291028</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add new member, add category, get by id rework, other new features for communities service, users service">
+      <option name="closed" value="true" />
+      <created>1693259891207</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1693259891207</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -300,7 +270,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Auth service: login, sign up, refresh, revoke features" />
     <MESSAGE value="major update for posts service, draft for communities service" />
-    <option name="LAST_COMMIT_MESSAGE" value="major update for posts service, draft for communities service" />
+    <MESSAGE value="add new member, add category, get by id rework, other new features for communities service, users service" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new member, add category, get by id rework, other new features for communities service, users service" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/forum$UsersServiceApplication.ic" NAME="UsersServiceApplication Coverage Results" MODIFIED="1691468731522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

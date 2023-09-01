@@ -29,4 +29,9 @@ public class Post {
     private Set<Like> likes;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
     private Set<Dislike> dislikes;
+    @Column(name = "communityId", nullable = false)
+    private long communityId;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private Category category;
 }

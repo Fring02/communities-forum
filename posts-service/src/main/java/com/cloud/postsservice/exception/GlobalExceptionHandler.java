@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     @ExceptionHandler({IllegalArgumentException.class, EntityExistsException.class,
-            EntityNotFoundException.class, UserNotFoundException.class})
+            EntityNotFoundException.class, ResourceNotFoundException.class})
     protected ResponseEntity<?> handleBadRequest(Exception e){
         logger.warn(e.getMessage());
         return ResponseEntity.badRequest().body(e.getMessage());

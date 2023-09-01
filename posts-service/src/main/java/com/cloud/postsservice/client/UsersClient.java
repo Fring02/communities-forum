@@ -10,9 +10,9 @@ import java.util.UUID;
 
 @FeignClient("http://users-service")
 public interface UsersClient {
-    @PostMapping("/api/users/{id}/exists")
-    ResponseEntity<Boolean> userExists(@PathVariable UUID id);
-    @GetMapping("/api/users/{id}/karma")
+    @GetMapping("/api/v1/users/{id}/exists")
+    boolean userExists(@PathVariable UUID id);
+    @GetMapping("/api/v1/users/{id}/karma")
     ResponseEntity<Integer> getUserRoles(@PathVariable UUID id);
 }
 

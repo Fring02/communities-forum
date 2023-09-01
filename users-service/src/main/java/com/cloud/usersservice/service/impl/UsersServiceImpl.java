@@ -57,6 +57,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public int getKarmaById(UUID id) {
+        var result = repository.findKarmaById(id);
+        if(result == null) throw new EntityNotFoundException("User with id " + id + " not found");
+        return result;
+    }
+
+    @Override
     public Collection<UserViewDto> getByIds(Collection<UUID> ids) {
         if(ids.isEmpty()) return Collections.emptyList();
         return repository.findByIdIsIn(ids);

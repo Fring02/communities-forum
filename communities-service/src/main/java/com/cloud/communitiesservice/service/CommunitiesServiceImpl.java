@@ -1,6 +1,8 @@
 package com.cloud.communitiesservice.service;
 
+import com.cloud.communitiesservice.client.PostsClient;
 import com.cloud.communitiesservice.client.UsersClient;
+import com.cloud.communitiesservice.dto.CategoryRequestDto;
 import com.cloud.communitiesservice.dto.community.*;
 import com.cloud.communitiesservice.dto.member.MembersListDto;
 import com.cloud.communitiesservice.entity.Community;
@@ -16,28 +18,33 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.cloud.netflix.ribbon.apache.HttpClientStatusCodeException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CommunitiesServiceImpl implements CommunitiesService {
     private final CommunitiesRepository repository;
     private final CommunitiesMembersRepository membersRepository;
     private final CommunityRolesRepository rolesRepository;
-    private final UsersClient client;
+    private final UsersClient usersClient;
+    private final PostsClient postsClient;
     private final ModelMapper mapper;
-    public CommunitiesServiceImpl(CommunitiesRepository repository, CommunitiesMembersRepository membersRepository, CommunityRolesRepository rolesRepository, UsersClient client, ModelMapper mapper) {
+    public CommunitiesServiceImpl(CommunitiesRepository repository, CommunitiesMembersRepository membersRepository, CommunityRolesRepository rolesRepository, UsersClient usersClient, PostsClient postsClient, ModelMapper mapper) {
         this.repository = repository;
         this.membersRepository = membersRepository;
         this.rolesRepository = rolesRepository;
-        this.client = client;
+        this.usersClient = usersClient;
+        this.postsClient = postsClient;
         this.mapper = mapper;
         this.mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
@@ -82,13 +89,14 @@ public class CommunitiesServiceImpl implements CommunitiesService {
         repository.findById(id).ifPresentOrElse(community -> {
             community.getCategories().add(category);
             repository.save(community);
+            postsClient.createPostCategoriesPerCommunity(new CategoryRequestDto(id, category));
         }, () -> {throw new EntityNotFoundException("Community with id " + id + " is not found");});
     }
 
     @Override
     public void addMember(RoleType roleType, UUID memberId, long communityId) {
         Objects.requireNonNull(memberId);
-        if(!client.userExists(memberId)) throw new UserNotFoundException("User with id " + memberId + " not found");
+        if(!usersClient.userExists(memberId)) throw new UserNotFoundException("User with id " + memberId + " not found");
         var newMember = new CommunityMember(memberId, communityId);
         List<CommunityMemberRole> assignedRoles = new ArrayList<>();
         assignedRoles.add(rolesRepository.findByName(RoleType.USER));
@@ -116,8 +124,8 @@ public class CommunitiesServiceImpl implements CommunitiesService {
                 r.getName().equals(RoleType.USER)).toList(), Pageable.ofSize(5))
                 .stream().map(d -> d.getId().getUserId()).collect(Collectors.toList());
 
-        Optional<MembersListDto> adminsList = client.getByIds(adminIds), moderatorsList = client.getByIds(moderatorIds),
-                topFiveUsersList = client.getByIds(userIds);
+        Optional<MembersListDto> adminsList = usersClient.getByIds(adminIds), moderatorsList = usersClient.getByIds(moderatorIds),
+                topFiveUsersList = usersClient.getByIds(userIds);
         communityView.setAdmins(adminsList.isPresent() ? adminsList.get().getUsers() : List.of());
         communityView.setModerators(moderatorsList.isPresent() ? moderatorsList.get().getUsers() : List.of());
         communityView.setMembers(topFiveUsersList.isPresent() ? topFiveUsersList.get().getUsers() : List.of());
@@ -141,7 +149,7 @@ public class CommunitiesServiceImpl implements CommunitiesService {
         if(repository.existsByTagOrName(dto.getTag(), dto.getName()))
             throw new EntityExistsException("Community with such tag or name already exists");
 
-        if(!client.userExists(ownerId)) throw new UserNotFoundException("User with id " + dto.getOwnerId() + " not found");
+        if(!usersClient.userExists(ownerId)) throw new UserNotFoundException("User with id " + dto.getOwnerId() + " not found");
         Community community = mapper.map(dto, Community.class);
         community = repository.save(community);
         var owner = new CommunityMember();

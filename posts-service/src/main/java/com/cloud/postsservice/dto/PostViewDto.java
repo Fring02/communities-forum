@@ -15,5 +15,8 @@ public interface PostViewDto extends DtoWithId<Long> {
     int getLikesCount();
     @Value("#{target.dislikes.size()}")
     int getDislikesCount();
+    @Value("#{target.category.name}")
+    String getCategoryName();
+    long getCommunityId();
     UUID getOwnerId();
 }

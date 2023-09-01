@@ -1,6 +1,8 @@
 package com.cloud.postsservice.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,4 +15,8 @@ public class PostCreateDto {
     private String ownerId;
     @NotBlank(message = "Description must not empty")
     private String description;
+    @NotBlank(message = "Category should be chosen")
+    private String category;
+    @Min(value = 1, message = "Community id must be greater than 0")
+    private long communityId;
 }

@@ -9,6 +9,7 @@ public class PostUpdateDto implements DtoWithId<Long> {
     private long id;
     private String title;
     private String description;
+    private String category;
     int incrementViews = 0;
     int incrementLikes = 0;
     int incrementDislikes = 0;

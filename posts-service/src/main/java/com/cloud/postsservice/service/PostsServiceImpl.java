@@ -1,19 +1,14 @@
 package com.cloud.postsservice.service;
 
+import com.cloud.postsservice.client.CommunitiesClient;
 import com.cloud.postsservice.client.UsersClient;
 import com.cloud.postsservice.dto.*;
-import com.cloud.postsservice.entity.Dislike;
-import com.cloud.postsservice.entity.Like;
-import com.cloud.postsservice.entity.Post;
-import com.cloud.postsservice.entity.View;
+import com.cloud.postsservice.entity.*;
 import com.cloud.postsservice.entity.id.DislikeId;
 import com.cloud.postsservice.entity.id.LikeId;
 import com.cloud.postsservice.entity.id.ViewId;
-import com.cloud.postsservice.exception.UserNotFoundException;
-import com.cloud.postsservice.repository.DislikesRepository;
-import com.cloud.postsservice.repository.LikesRepository;
-import com.cloud.postsservice.repository.PostsRepository;
-import com.cloud.postsservice.repository.ViewsRepository;
+import com.cloud.postsservice.exception.ResourceNotFoundException;
+import com.cloud.postsservice.repository.*;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -25,7 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -35,23 +30,28 @@ public class PostsServiceImpl implements PostsService {
     private final PostsRepository repository;
     private final LikesRepository likesRepository;
     private final DislikesRepository dislikesRepository;
+    private final CategoriesRepository categoriesRepository;
     private final ModelMapper mapper;
     private final UsersClient usersClient;
+    private final CommunitiesClient communitiesClient;
     private final ViewsRepository viewsRepository;
     @Value("${posts.karma.min}")
     private int requiredKarma;
 
     public PostsServiceImpl(PostsRepository repository, LikesRepository likesRepository,
-                            DislikesRepository dislikesRepository, ModelMapper mapper, UsersClient usersClient,
-                            ViewsRepository viewsRepository) {
+                            DislikesRepository dislikesRepository, CategoriesRepository categoriesRepository, ModelMapper mapper, UsersClient usersClient,
+                            CommunitiesClient communitiesClient, ViewsRepository viewsRepository) {
         this.repository = repository;
         this.likesRepository = likesRepository;
         this.dislikesRepository = dislikesRepository;
+        this.categoriesRepository = categoriesRepository;
         this.mapper = mapper;
+        this.communitiesClient = communitiesClient;
         this.mapper.addMappings(new PropertyMap<PostCreateDto, Post>() {
             @Override
             protected void configure() {
                 skip(destination.getId());
+                skip(destination.getCategory());
             }
         });
         this.usersClient = usersClient;
@@ -66,21 +66,31 @@ public class PostsServiceImpl implements PostsService {
         } catch (Exception e){
             throw new IllegalArgumentException("Owner id is invalid");
         }
-        if(repository.existsByTitle(dto.getTitle())) throw new EntityExistsException("Post with such title already exists");
-        var userExistsResponse = usersClient.userExists(ownerId);
-        if(!userExistsResponse.getStatusCode().is2xxSuccessful()) throw new IllegalArgumentException("User fetch error");
-        if(Objects.equals(userExistsResponse.getBody(), false)) throw new UserNotFoundException("User with id " + dto.getOwnerId() + " not found");
+        if(repository.existsByTitle(dto.getTitle()))
+            throw new EntityExistsException("Post with such title already exists");
+        if(!communitiesClient.communityExists(dto.getCommunityId()))
+            throw new ResourceNotFoundException("Community with id " + dto.getCommunityId() + " not found");
+        if(!usersClient.userExists(ownerId))
+            throw new ResourceNotFoundException("User with id " + dto.getOwnerId() + " not found");
         var userHasEnoughKarmaResponse = usersClient.getUserRoles(ownerId);
         if(!userHasEnoughKarmaResponse.getStatusCode().is2xxSuccessful()) throw new IllegalArgumentException("User fetch error");
         if(userHasEnoughKarmaResponse.getBody() < requiredKarma)
             throw new IllegalArgumentException("User with id " + dto.getOwnerId() + " not found");
+
+        Category categoryOpt = categoriesRepository.findByNameAndCommunityId(dto.getCategory(), dto.getCommunityId());
+        if(categoryOpt == null)
+            throw new EntityNotFoundException("Category with name " + dto.getCategory() + " is not found in this community");
         Post post = mapper.map(dto, Post.class);
         post.setOwnerId(ownerId);
         post.setPostedAt(LocalDate.now());
+        post.setCategory(categoryOpt);
         post = repository.save(post);
         //adding 1 view as post owner's view
         viewsRepository.save(new View(ownerId, post.getId(), post));
-        return mapper.map(post, PostCreatedDto.class);
+        var newPost = mapper.map(post, PostCreatedDto.class);
+        newPost.setCategory(categoryOpt.getName());
+        newPost.setViewCount(1);
+        return newPost;
     }
     @Transactional(readOnly = true)
     public Collection<PostViewDto> getAll(){
@@ -110,9 +120,9 @@ public class PostsServiceImpl implements PostsService {
         var postOpt = repository.findById(dto.getId());
         if(postOpt.isEmpty()) throw new EntityNotFoundException("Post with id " + dto.getId() + " not found");
         var post = postOpt.get();
-        if(StringUtils.hasLength(dto.getTitle()) && !dto.getTitle().equals(post.getTitle()))
+        if(!StringUtils.isBlank(dto.getTitle()) && !dto.getTitle().equals(post.getTitle()))
             post.setTitle(dto.getTitle());
-        if(StringUtils.hasLength(dto.getDescription()) && !dto.getDescription().equals(post.getDescription()))
+        if(!StringUtils.isBlank(dto.getDescription()) && !dto.getDescription().equals(post.getDescription()))
             post.setDescription(dto.getDescription());
         repository.save(post);
     }
@@ -122,6 +132,26 @@ public class PostsServiceImpl implements PostsService {
         if(!repository.existsById(id)) throw new EntityNotFoundException("Post already deleted");
         repository.deleteById(id);
     }
+
+    @Override
+    public Page<PostViewDto> getAll(long communityId, String category, int page, int pageCount) {
+        if(page <= 0 || pageCount <= 0) throw new IllegalArgumentException("Number of items per page is invalid");
+        page--;
+        Pageable pageable = PageRequest.of(page, pageCount).withSort(Sort.by("postedAt").ascending());
+        if(communityId > 0 && !StringUtils.isBlank(category))
+            return repository.findByCommunityIdAndCategory_Name(communityId, category, pageable);
+        else
+            return repository.findByCommunityId(communityId, pageable);
+    }
+
+    @Override
+    public Collection<PostViewDto> getAll(long communityId, String category) {
+        if(communityId > 0 && !StringUtils.isBlank(category))
+            return repository.findByCommunityIdAndCategory_Name(communityId, category);
+        else
+            return repository.findByCommunityId(communityId);
+    }
+
     @Override
     public long updateViewsCount(long postId, UUID userId) throws EntityNotFoundException {
         if(postId <= 0) throw new IllegalArgumentException("Post id is invalid");

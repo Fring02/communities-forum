@@ -13,12 +13,12 @@ import java.util.UUID;
 
 @FeignClient("http://users-service")
 public interface UsersClient {
-    @GetMapping("/api/users/{id}/exists")
+    @GetMapping("/api/v1/users/{id}/exists")
     boolean userExists(@PathVariable UUID id);
-    @GetMapping("/api/users/ids={ids}")
+    @GetMapping("/api/v1/users/ids={ids}")
     Optional<MembersListDto> getByIds(@PathVariable("ids") Collection<UUID> ids);
-    @GetMapping("/api/users/{id}")
+    @GetMapping("/api/v1/users/{id}")
     ResponseEntity<MemberDto> getById(@PathVariable UUID id);
-    @GetMapping("/api/users/username/{username}/roles")
+    @GetMapping("/api/v1/users/username/{username}/roles")
     ResponseEntity<UserRolesDto> getUserRoles(@PathVariable("username") String username);
 }
