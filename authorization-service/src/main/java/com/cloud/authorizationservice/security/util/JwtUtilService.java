@@ -8,6 +8,8 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
+@RefreshScope
 public class JwtUtilService implements Serializable {
     private final UserDetailsService userDetailsService;
     @Serial

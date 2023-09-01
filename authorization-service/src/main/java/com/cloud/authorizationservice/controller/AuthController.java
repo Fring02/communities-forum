@@ -10,17 +10,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
 @RestController
+@RefreshScope
 @RequestMapping("/api/v1/auth")
 public class AuthController {
     private final AuthService authService;
     @Value("${jwt.expirationDuration}")
     private int tokenLifetime;
+    @GetMapping("/jwt")
+    public String get(){
+        return Integer.toString(tokenLifetime);
+    }
     public AuthController(AuthService authService) {
         this.authService = authService;
     }

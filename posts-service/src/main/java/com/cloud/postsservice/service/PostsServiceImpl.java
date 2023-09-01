@@ -14,6 +14,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@RefreshScope
 public class PostsServiceImpl implements PostsService {
     private final PostsRepository repository;
     private final LikesRepository likesRepository;

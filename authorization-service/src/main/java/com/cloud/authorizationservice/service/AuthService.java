@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,6 +30,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Service
+@RefreshScope
 public class AuthService {
     private final LoginsRepository repository;
     private final JwtUtilService jwtService;
