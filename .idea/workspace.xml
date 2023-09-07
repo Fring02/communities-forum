@@ -4,41 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="add new member, add category, get by id rework, other new features for communities service, users service">
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/PostsClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/dto/CategoryRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/CommunitiesClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/CategoryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/CategoryRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/CategoriesRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/CategoriesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/CategoriesServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/dto/user/UserKarmaDto.java" afterDir="false" />
+    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="Added dynamic config changes with SCBus">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/client/UsersClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/client/UsersClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/service/CommunitiesServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/UsersClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/client/UsersClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostCreateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostViewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/dto/PostViewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/DislikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/DislikesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/LikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/LikesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/ViewsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/repository/ViewsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/service/PostsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/repository/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/UsersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/service/impl/UsersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-discovery/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-discovery/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -104,7 +80,7 @@
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum/config-server/src/main/resources/config/communities-service&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;decbc0baf76ca60e722a69f040ee304a&quot;
+    &quot;spring.configuration.checksum&quot;: &quot;fd6c3ae2a84538c50421bce73a35cb74&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -131,7 +107,14 @@
       <recent name="com.cloud.authorizationservice.security.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.PostsServiceApplication">
+  <component name="RunManager" selected="Spring Boot.AuthorizationServiceApplication">
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.apigateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthorizationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="authorization-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.authorizationservice.AuthorizationServiceApplication" />
@@ -176,6 +159,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthorizationServiceApplication" />
       <item itemvalue="Spring Boot.CommunitiesServiceApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication" />
@@ -227,7 +211,14 @@
       <workItem from="1693427879288" duration="7005000" />
       <workItem from="1693445866138" duration="692000" />
       <workItem from="1693446799777" duration="4246000" />
-      <workItem from="1693528910714" duration="3487000" />
+      <workItem from="1693528910714" duration="4001000" />
+      <workItem from="1693590869571" duration="5454000" />
+      <workItem from="1693784848125" duration="263000" />
+      <workItem from="1693785118271" duration="4767000" />
+      <workItem from="1694026129383" duration="58000" />
+      <workItem from="1694036048001" duration="2968000" />
+      <workItem from="1694045193069" duration="568000" />
+      <workItem from="1694045774027" duration="7094000" />
     </task>
     <task id="LOCAL-00001" summary="Added Auth service: login, sign up, refresh, revoke features">
       <option name="closed" value="true" />
@@ -253,7 +244,23 @@
       <option name="project" value="LOCAL" />
       <updated>1693259891207</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Minor features for communities and posts service, service interactions">
+      <option name="closed" value="true" />
+      <created>1693532758581</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1693532758581</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added dynamic config changes with SCBus">
+      <option name="closed" value="true" />
+      <created>1693596170612</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1693596170612</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -271,7 +278,9 @@
     <MESSAGE value="Added Auth service: login, sign up, refresh, revoke features" />
     <MESSAGE value="major update for posts service, draft for communities service" />
     <MESSAGE value="add new member, add category, get by id rework, other new features for communities service, users service" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new member, add category, get by id rework, other new features for communities service, users service" />
+    <MESSAGE value="Minor features for communities and posts service, service interactions" />
+    <MESSAGE value="Added dynamic config changes with SCBus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added dynamic config changes with SCBus" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/forum$UsersServiceApplication.ic" NAME="UsersServiceApplication Coverage Results" MODIFIED="1691468731522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
