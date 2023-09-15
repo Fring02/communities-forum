@@ -23,10 +23,6 @@ public class AuthController {
     private final AuthService authService;
     @Value("${jwt.expirationDuration}")
     private int tokenLifetime;
-    @GetMapping("/jwt")
-    public String get(){
-        return Integer.toString(tokenLifetime);
-    }
     public AuthController(AuthService authService) {
         this.authService = authService;
     }

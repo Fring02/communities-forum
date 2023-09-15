@@ -13,7 +13,7 @@ public class LoginDetails implements UserDetails {
     private final User user;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream().map(r -> new SimpleGrantedAuthority("ROLE_" + r)).toList();
+        return user.getRoles().stream().map(SimpleGrantedAuthority::new).toList();
     }
     @Override
     public String getPassword() {

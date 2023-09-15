@@ -4,6 +4,7 @@ import com.cloud.communitiesservice.dto.community.*;
 import com.cloud.communitiesservice.dto.member.NewMemberDto;
 import com.cloud.communitiesservice.entity.RoleType;
 import com.cloud.communitiesservice.service.CommunitiesService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,12 +53,14 @@ public class CommunitiesController {
         return ResponseEntity.ok(service.existsById(id));
     }
     @PostMapping("/{id}/categories")
+    @RolesAllowed("moderator")
     public ResponseEntity<?> addCommunityCategories(@PathVariable("id") long id, @RequestBody String category){
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.addCategory(id, category);
         return ResponseEntity.ok().build();
     }
     @PostMapping("/{id}/members")
+    @RolesAllowed({"admin", "moderator"})
     public ResponseEntity<?> addCommunityMember(@PathVariable("id") long id, @RequestBody NewMemberDto memberDto){
         if(memberDto.getUserId() == null) return ResponseEntity.badRequest().body("User id not provided");
         RoleType roleType = Enum.valueOf(RoleType.class, memberDto.getRole());
@@ -65,12 +68,14 @@ public class CommunitiesController {
         return ResponseEntity.ok("New member added");
     }
     @PostMapping
+    @RolesAllowed("user")
     public ResponseEntity<CommunityCreatedDto> createCommunity(@RequestBody @Valid CommunityCreateDto dto, HttpServletRequest request)
             throws EntityNotFoundException, EntityExistsException {
         var newPost = service.create(dto);
         return ResponseEntity.created(URI.create(request.getRequestURI())).body(newPost);
     }
     @PatchMapping("/{id}")
+    @RolesAllowed("admin")
     public ResponseEntity<?> updateById(@PathVariable("id") long id, @RequestBody CommunityUpdateDto dto) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         dto.setId(id);
@@ -78,6 +83,7 @@ public class CommunitiesController {
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("/{id}")
+    @RolesAllowed("admin")
     public ResponseEntity<?> deleteById(@PathVariable("id") long id) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.deleteById(id);

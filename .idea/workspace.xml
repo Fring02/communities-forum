@@ -4,17 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="Added dynamic config changes with SCBus">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6808824b-9862-4f0d-bb34-1bf6a4ce4a81" name="Changes" comment="Added API gateway and dependencies transparency issue resolved">
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/config/GatewayConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/filter/AuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/util/JwtUtilService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/util/DatabaseSeeder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/filter/JwtAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/util/JwtUtilService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config-server/src/main/java/com/cloud/configserver/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/filter/JwtAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/util/JwtUtilService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-discovery/src/main/java/com/cloud/servicediscovery/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/filter/JwtAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/JwtUtilService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/cloud/apigateway/ApiGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/LoginInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/entity/LoginInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/filter/JwtAuthorizationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/filter/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/AuthenticationProviderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/service/AuthenticationProviderImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/user/LoginDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/cloud/authorizationservice/security/user/LoginDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/communities-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/java/com/cloud/communitiesservice/controller/CommunitiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communities-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/communities-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/java/com/cloud/configserver/ConfigServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/java/com/cloud/configserver/ConfigServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/config/authorization-service/authorization-service.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/java/com/cloud/postsservice/controller/PostsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/posts-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service-discovery/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-discovery/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-discovery/src/main/java/com/cloud/servicediscovery/ServiceDiscoveryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-discovery/src/main/java/com/cloud/servicediscovery/ServiceDiscoveryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-discovery/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service-discovery/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/DatabaseSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/cloud/usersservice/util/DatabaseSeeder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +118,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum/config-server/src/main/resources/config/communities-service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Султан/IdeaProjects/forum/communities-service/src/main/java/com/cloud/communitiesservice&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;fd6c3ae2a84538c50421bce73a35cb74&quot;
   },
@@ -96,18 +136,21 @@
       <recent name="com.cloud.postsservice.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Султан\IdeaProjects\forum\config-server\src\main\resources\config\communities-service" />
       <recent name="C:\Users\Султан\IdeaProjects\forum\communities-service\src\main\java\com\cloud\communitiesservice" />
+      <recent name="C:\Users\Султан\IdeaProjects\forum\posts-service\src\main\java\com\cloud\postsservice" />
+      <recent name="C:\Users\Султан\IdeaProjects\forum\config-server\src\main\resources\config\communities-service" />
       <recent name="C:\Users\Султан\IdeaProjects\forum\communities-service\src\main\java\com\cloud\communitiesservice\service" />
       <recent name="C:\Users\Султан\IdeaProjects\forum\communities-service\src\main\java\com\cloud\communitiesservice\repository" />
-      <recent name="C:\Users\Султан\IdeaProjects\forum\posts-service\src\main\java\com\cloud\postsservice\service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cloud.communitiesservice.config" />
+      <recent name="com.cloud.communitiesservice.util" />
+      <recent name="com.cloud.postsservice.config" />
       <recent name="com.cloud.postsservice.dto" />
       <recent name="com.cloud.authorizationservice.security.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthorizationServiceApplication">
+  <component name="RunManager" selected="Spring Boot.ServiceDiscoveryApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.apigateway.ApiGatewayApplication" />
@@ -218,7 +261,16 @@
       <workItem from="1694026129383" duration="58000" />
       <workItem from="1694036048001" duration="2968000" />
       <workItem from="1694045193069" duration="568000" />
-      <workItem from="1694045774027" duration="7094000" />
+      <workItem from="1694045774027" duration="7629000" />
+      <workItem from="1694121220060" duration="140000" />
+      <workItem from="1694461280974" duration="4673000" />
+      <workItem from="1694475254711" duration="2685000" />
+      <workItem from="1694540758163" duration="6630000" />
+      <workItem from="1694550925384" duration="5367000" />
+      <workItem from="1694563674594" duration="5639000" />
+      <workItem from="1694649096158" duration="4375000" />
+      <workItem from="1694692612700" duration="2279000" />
+      <workItem from="1694741947668" duration="6887000" />
     </task>
     <task id="LOCAL-00001" summary="Added Auth service: login, sign up, refresh, revoke features">
       <option name="closed" value="true" />
@@ -260,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693596170612</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added API gateway and dependencies transparency issue resolved">
+      <option name="closed" value="true" />
+      <created>1694053367554</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694053367554</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,7 +340,8 @@
     <MESSAGE value="add new member, add category, get by id rework, other new features for communities service, users service" />
     <MESSAGE value="Minor features for communities and posts service, service interactions" />
     <MESSAGE value="Added dynamic config changes with SCBus" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added dynamic config changes with SCBus" />
+    <MESSAGE value="Added API gateway and dependencies transparency issue resolved" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added API gateway and dependencies transparency issue resolved" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/forum$UsersServiceApplication.ic" NAME="UsersServiceApplication Coverage Results" MODIFIED="1691468731522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

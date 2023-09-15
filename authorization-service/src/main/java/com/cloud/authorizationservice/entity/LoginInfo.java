@@ -2,7 +2,9 @@ package com.cloud.authorizationservice.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.java.Log;
 
 import java.time.LocalDate;
 
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @IdClass(LoginId.class)
+@NoArgsConstructor
 public class LoginInfo {
     @Id
     @Column(name = "username")
@@ -22,4 +25,8 @@ public class LoginInfo {
     private String refreshToken;
     @Column(name = "refreshTokenExpiryDate")
     private LocalDate refreshTokenExpiryDate = LocalDate.now();
+    public LoginInfo(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 }

@@ -1,8 +1,6 @@
-package com.cloud.authorizationservice.security.filter;
+package com.cloud.postsservice.filter;
 
-import com.cloud.authorizationservice.security.util.JwtUtilService;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
+import com.cloud.postsservice.util.JwtUtilService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -39,24 +37,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        logger.info("Authenticating request with JWT token " + token);
+        logger.info("Authorizing request with JWT token " + token);
+
         if(SecurityContextHolder.getContext().getAuthentication() == null){
-            try {
-                var userDetails = jwtService.validateTokenAndGetUser(token);
-                if(userDetails == null) {
-                    logger.warn("Couldn't fetch user from token, unauthorized");
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    return;
-                }
-                var authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(),userDetails.getAuthorities());
+                var roles = jwtService.getRolesFromToken(token);
+                var userDetails = jwtService.getUserDetailsFromToken(token, roles);
+                var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                logger.info("Request is authenticated. Setting authentication to true");
+                logger.info("Request is authenticated.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            } catch (ExpiredJwtException e){
-                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            } catch (IllegalArgumentException | UsernameNotFoundException | JwtException e){
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            }
         } else {
             logger.info("Request is authenticated");
         }

@@ -18,7 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    @ExceptionHandler({IllegalArgumentException.class, EntityExistsException.class, EntityNotFoundException.class})
+    @ExceptionHandler({IllegalArgumentException.class, EntityExistsException.class, EntityNotFoundException.class,
+            ResourceNotFoundException.class})
     protected ResponseEntity<?> handleBadRequest(Exception e){
         logger.warn(e.getMessage());
         return ResponseEntity.badRequest().body(e.getMessage());
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(ex.getFieldErrors().get(0).getDefaultMessage());
     }
     @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
-    protected ResponseEntity<?> handleForbidden(Exception e){
+    protected ResponseEntity<?> handleUnauthorized(Exception e){
         logger.warn(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }

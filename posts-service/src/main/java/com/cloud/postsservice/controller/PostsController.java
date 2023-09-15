@@ -5,6 +5,7 @@ import com.cloud.postsservice.entity.Category;
 import com.cloud.postsservice.repository.CategoriesRepository;
 import com.cloud.postsservice.service.CategoriesService;
 import com.cloud.postsservice.service.PostsService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @RequestMapping("/api/v1/posts")
 @RestController
+@CrossOrigin("http://api-gateway")
 public class PostsController {
     private final PostsService service;
     private final CategoriesService categoriesService;
@@ -59,18 +61,21 @@ public class PostsController {
         return ResponseEntity.of(service.getById(id));
     }
     @PostMapping
+    @RolesAllowed("user")
     public ResponseEntity<PostCreatedDto> addPost(@RequestBody @Valid PostCreateDto dto, HttpServletRequest request)
             throws EntityNotFoundException, EntityExistsException {
         var newPost = service.create(dto);
         return ResponseEntity.created(URI.create(request.getRequestURI())).body(newPost);
     }
     @PostMapping("/categories")
+    @RolesAllowed({"admin", "moderator"})
     public ResponseEntity<?> addCategoriesForCommunity(@RequestBody CategoryRequestDto dto){
         dto.setCategory(dto.getCategory().replace("\"", ""));
         categoriesService.addCategory(dto);
         return ResponseEntity.ok("Added");
     }
     @PatchMapping("/{id}")
+    @RolesAllowed("user")
     public ResponseEntity<?> updateById(@PathVariable("id") long id, @RequestBody PostUpdateDto dto) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         dto.setId(id);
@@ -78,6 +83,7 @@ public class PostsController {
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("/{id}")
+    @RolesAllowed({"user", "moderator"})
     public ResponseEntity<?> deleteById(@PathVariable("id") long id) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.deleteById(id);
@@ -89,12 +95,14 @@ public class PostsController {
         return ResponseEntity.ok(service.updateViewsCount(id, userId));
     }
     @PatchMapping("/{id}/likes")
+    @RolesAllowed("user")
     public ResponseEntity<?> updateLikesCountForPost(@PathVariable("id") long id, @RequestBody UUID userId) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.updateLikesCount(id, userId);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{id}/dislikes")
+    @RolesAllowed("user")
     public ResponseEntity<?> updateDislikesCountForPost(@PathVariable("id") long id, @RequestBody UUID userId) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.updateDislikesCount(id, userId);

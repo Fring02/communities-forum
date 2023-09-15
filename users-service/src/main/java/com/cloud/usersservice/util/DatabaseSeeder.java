@@ -21,7 +21,7 @@ public final class DatabaseSeeder {
     public void seedUsers(){
         var admin = new User(UUID.randomUUID(),
                 "Sultan", "Khassenov", "hasenovsultanbek@gmail.com", "fring0213", 2,
-                List.of("admin", "user"));
+                List.of("superadmin", "user"));
         var secondUser = new User(UUID.randomUUID(), "Saule", "Koldybaeva", "sullek75@gmail.com", "sullek75", 1,
                 List.of("user"));
         var thirdUser = new User(UUID.randomUUID(), "Dastan", "Khassenov", "dasthas12@gmail.com", "Pillager01",
