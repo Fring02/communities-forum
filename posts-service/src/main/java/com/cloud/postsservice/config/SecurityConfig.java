@@ -17,18 +17,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
-    @Autowired
-    private JwtUtilService jwtUtilService;
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity http, JwtUtilService jwtUtilService) throws Exception {
         http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests().anyRequest().permitAll();
         // Add JWT token filter
-        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthFilter(jwtUtilService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     @Bean
-    public Filter jwtAuthFilter(){
+    public Filter jwtAuthFilter(JwtUtilService jwtUtilService){
         return new JwtAuthorizationFilter(jwtUtilService);
     }
     @Value("${spring.websecurity.debug:false}")

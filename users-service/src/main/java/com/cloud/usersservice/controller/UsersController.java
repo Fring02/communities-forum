@@ -6,7 +6,6 @@ import com.cloud.usersservice.dto.user.UserUpdateDto;
 import com.cloud.usersservice.dto.user.UsersListDto;
 import com.cloud.usersservice.dto.user.UsersPageDto;
 import com.cloud.usersservice.service.UsersService;
-import com.cloud.usersservice.service.impl.UsersServiceImpl;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -26,10 +25,9 @@ import java.util.UUID;
 @RequestMapping("/api/v1/users")
 public class UsersController {
     private final UsersService service;
-    private final Logger logger;
+    private final Logger logger = LoggerFactory.getLogger(UsersController.class);
     public UsersController(UsersService service) {
         this.service = Objects.requireNonNull(service);
-        logger = LoggerFactory.getLogger(UsersController.class);
     }
     @GetMapping
     @RolesAllowed("superadmin")
@@ -74,7 +72,6 @@ public class UsersController {
         return ResponseEntity.of(service.getById(uuid));
     }
     @GetMapping("/{id}/karma")
-    @RolesAllowed("user")
     @CrossOrigin("http://posts-service")
     public ResponseEntity<?> getKarmaByUserId(@PathVariable("id") String id){
         if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body("Id is invalid");

@@ -1,6 +1,6 @@
 package com.cloud.communitiesservice.repository.base;
 
-import com.cloud.communitiesservice.dto.DtoWithId;
+import com.cloud.communitiesservice.dto.base.DtoWithId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -9,7 +9,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @NoRepositoryBean

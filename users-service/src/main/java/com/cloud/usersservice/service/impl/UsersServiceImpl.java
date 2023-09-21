@@ -5,11 +5,14 @@ import com.cloud.usersservice.dto.user.*;
 import com.cloud.usersservice.entity.User;
 import com.cloud.usersservice.repository.UsersRepository;
 import com.cloud.usersservice.service.UsersService;
+import com.cloud.usersservice.dto.misc.NotificationMessageDto;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +26,15 @@ import java.util.*;
 @Service
 public class UsersServiceImpl implements UsersService {
     private final UsersRepository repository;
-    private final Logger logger;
+    private final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
     private final ModelMapper mapper;
-    public UsersServiceImpl(UsersRepository repository, ModelMapper mapper) {
+    private final RabbitTemplate rabbitTemplate;
+    @Value("${notifications.exchange.name}")
+    private String exchangeName;
+    public UsersServiceImpl(UsersRepository repository, ModelMapper mapper, RabbitTemplate rabbitTemplate) {
         this.repository = Objects.requireNonNull(repository);
         this.mapper = mapper;
-        logger = LoggerFactory.getLogger(UsersServiceImpl.class);
+        this.rabbitTemplate = rabbitTemplate;
     }
     @Transactional(readOnly = true)
     public Collection<UserViewDto> getAll(){
@@ -40,7 +46,6 @@ public class UsersServiceImpl implements UsersService {
         if(page <= 0 || pageCount <= 0) throw new IllegalArgumentException("Number of items per page is invalid");
         page--;
         Pageable pageable = PageRequest.of(page, pageCount).withSort(Sort.by("email").ascending());
-
         logger.info(String.format("Fetching %d users by page %d...", pageCount, page));
         return repository.findBy(UserViewDto.class, pageable);
     }
@@ -57,6 +62,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getKarmaById(UUID id) {
         var result = repository.findKarmaById(id);
         if(result == null) throw new EntityNotFoundException("User with id " + id + " not found");
@@ -64,6 +70,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection<UserViewDto> getByIds(Collection<UUID> ids) {
         if(ids.isEmpty()) return Collections.emptyList();
         return repository.findByIdIsIn(ids);
@@ -101,7 +108,7 @@ public class UsersServiceImpl implements UsersService {
         });
     }
     @Transactional
-    public void deleteById(UUID id) throws EntityNotFoundException{
+    public void deleteById(UUID id) throws EntityNotFoundException {
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         if(!repository.existsById(id)) throw new EntityNotFoundException("User with id " + id + " doesn't exist");
         logger.info("Deleting user by id " + id);
@@ -135,5 +142,7 @@ public class UsersServiceImpl implements UsersService {
         logger.info("Incrementing user's karma...");
         repository.saveAll(List.of(user, subscriber));
         logger.info(String.format("Subscription of user %s to user %s successful", subscriptionDto.getUserId(), subscriptionDto.getSubscriberId()));
+        rabbitTemplate.convertAndSend(exchangeName, new NotificationMessageDto(
+                subscriptionDto.getUserId(), subscriber.getUserName() + " has subscribed to you"));
     }
 }

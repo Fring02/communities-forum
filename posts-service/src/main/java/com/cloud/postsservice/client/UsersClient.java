@@ -4,7 +4,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.UUID;
 
@@ -13,6 +12,6 @@ public interface UsersClient {
     @GetMapping("/api/v1/users/{id}/exists")
     boolean userExists(@PathVariable UUID id);
     @GetMapping("/api/v1/users/{id}/karma")
-    ResponseEntity<Integer> getUserRoles(@PathVariable UUID id);
+    ResponseEntity<Integer> getUserKarma(@PathVariable UUID id);
 }
 

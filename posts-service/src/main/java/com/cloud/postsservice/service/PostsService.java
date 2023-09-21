@@ -1,12 +1,11 @@
 package com.cloud.postsservice.service;
 
-import com.cloud.postsservice.dto.*;
+import com.cloud.postsservice.dto.post.*;
 import com.cloud.postsservice.service.base.CrudService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface PostsService extends CrudService<Long, PostViewDto, PostFullViewDto,

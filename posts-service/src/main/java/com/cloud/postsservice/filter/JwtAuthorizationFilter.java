@@ -38,12 +38,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
         logger.info("Authorizing request with JWT token " + token);
-
         if(SecurityContextHolder.getContext().getAuthentication() == null){
                 var roles = jwtService.getRolesFromToken(token);
                 var userDetails = jwtService.getUserDetailsFromToken(token, roles);
                 var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authentication.setDetails(userDetails);
                 logger.info("Request is authenticated.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {

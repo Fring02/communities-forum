@@ -21,6 +21,8 @@ public class Post {
     private LocalDate postedAt = LocalDate.now();
     @Column(name = "ownerId", nullable = false)
     private UUID ownerId;
+    @Column(name = "ownerUsername", nullable = false)
+    private String ownerUsername;
     @Column(name = "description", nullable = false)
     private String description;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
@@ -31,7 +33,6 @@ public class Post {
     private Set<Dislike> dislikes;
     @Column(name = "communityId", nullable = false)
     private long communityId;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    private Category category;
+    @Column(name = "category", nullable = false)
+    private String category;
 }

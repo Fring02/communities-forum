@@ -1,6 +1,6 @@
 package com.cloud.communitiesservice.dto.community;
 
-import com.cloud.communitiesservice.dto.DtoWithId;
+import com.cloud.communitiesservice.dto.base.DtoWithId;
 import lombok.Getter;
 import lombok.Setter;
 

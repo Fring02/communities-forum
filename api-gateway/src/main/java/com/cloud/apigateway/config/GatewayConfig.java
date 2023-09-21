@@ -1,6 +1,5 @@
 package com.cloud.apigateway.config;
 
-import com.cloud.apigateway.filter.AuthenticationFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,10 +12,6 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.a
 
 @Configuration
 public class GatewayConfig {
-    /*private final AuthenticationFilter authFilter;
-    public GatewayConfig(AuthenticationFilter authFilter) {
-        this.authFilter = authFilter;
-    }*/
     @Bean
     public RouteLocator dynamicZipCodeRoute(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -31,7 +26,10 @@ public class GatewayConfig {
                                 chain.filter(appendApiPrefixFilter(exchange, "communities")))).uri("lb://communities-service"))
                 .route("authorization-service", r ->
                         r.path("/auth/**").filters(f -> f.filter((exchange, chain) ->
-                                chain.filter(appendApiPrefixFilter(exchange, "auth")))/*.filter(authFilter)*/).uri("lb://authorization-service"))
+                                chain.filter(appendApiPrefixFilter(exchange, "auth")))).uri("lb://authorization-service"))
+                .route("notifications-service", r ->
+                        r.path("/notifications/**").filters(f -> f.filter((exchange, chain) -> chain.filter(appendApiPrefixFilter(exchange,
+                                "notifications")))).uri("lb://notifications-service"))
                 .build();
     }
     private ServerWebExchange appendApiPrefixFilter(ServerWebExchange exchange, String endpointPartName){

@@ -23,7 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        logger.warn("Invalid format of request body");
+        logger.warn("Invalid format of request body: " + ex.getFieldErrors().get(0).getDefaultMessage());
         return ResponseEntity.badRequest().body(ex.getFieldErrors().get(0).getDefaultMessage());
     }
 }

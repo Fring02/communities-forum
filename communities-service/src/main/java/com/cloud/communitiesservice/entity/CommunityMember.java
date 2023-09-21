@@ -22,6 +22,8 @@ public class CommunityMember {
             @AttributeOverride(name = "communityId", column = @Column(name = "community_id", nullable = false))
     })
     private CommunityMemberId id;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
     @MapsId("community_id")
     @JoinColumn(name = "community_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

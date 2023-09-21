@@ -1,6 +1,6 @@
 package com.cloud.communitiesservice.dto.community;
 
-import com.cloud.communitiesservice.dto.DtoWithId;
+import com.cloud.communitiesservice.dto.base.DtoWithId;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +11,7 @@ public class CommunityUpdateDto implements DtoWithId<Long> {
     private String name;
     private String tag;
     private String description;
+    private long requiredKarma;
     @Override
     public Long getId() {
         return id;

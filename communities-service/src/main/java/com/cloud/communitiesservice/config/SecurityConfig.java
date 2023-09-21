@@ -1,6 +1,8 @@
 package com.cloud.communitiesservice.config;
 
 import com.cloud.communitiesservice.filter.JwtAuthorizationFilter;
+import com.cloud.communitiesservice.repository.CommunitiesMembersRepository;
+import com.cloud.communitiesservice.repository.CommunityRolesRepository;
 import com.cloud.communitiesservice.util.JwtUtilService;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +17,18 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity(prePostEnabled = false, securedEnabled = false, jsr250Enabled = true)
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
-    @Autowired
-    private JwtUtilService jwtUtilService;
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity http, JwtUtilService jwtUtilService) throws Exception {
         http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests().anyRequest().permitAll();
         // Add JWT token filter
-        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthFilter(jwtUtilService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     @Bean
-    public Filter jwtAuthFilter(){
+    public Filter jwtAuthFilter(JwtUtilService jwtUtilService){
         return new JwtAuthorizationFilter(jwtUtilService);
     }
     @Value("${spring.websecurity.debug:false}")

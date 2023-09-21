@@ -44,7 +44,6 @@ public class User {
     private List<User> subscribers;
     @ManyToMany(mappedBy = "subscribers", cascade = CascadeType.PERSIST)
     private List<User> subscriberOf;
-
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof User user)) return false;

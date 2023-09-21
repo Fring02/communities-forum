@@ -16,6 +16,7 @@ public class CommunityFullViewWrapperDto implements CommunityFullViewDto {
     private String tag;
     private String name;
     private String description;
+    private long requiredKarma;
     private long membersCount;
     private Set<String> categories;
     private Collection<MemberDto> members;
@@ -29,6 +30,7 @@ public class CommunityFullViewWrapperDto implements CommunityFullViewDto {
     }
     public CommunityFullViewWrapperDto(CommunityWithCategoriesViewDto dto){
         this.id = dto.getId();
+        this.requiredKarma = dto.getRequiredKarma();
         this.tag = dto.getTag();
         this.name = dto.getName();
         this.description = dto.getDescription();
@@ -36,20 +38,8 @@ public class CommunityFullViewWrapperDto implements CommunityFullViewDto {
         this.categories = dto.getCategories();
     }
     @Override
-    public long getMembersCount() {
-        return membersCount;
-    }
-    @Override
-    public Collection<MemberDto> getModerators() {
-        return moderators;
-    }
-    @Override
     public long getModeratorsCount() {
         return moderators.size();
-    }
-    @Override
-    public Collection<MemberDto> getAdmins() {
-        return admins;
     }
     @Override
     public long getAdminsCount() {

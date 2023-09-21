@@ -48,7 +48,6 @@ public class AuthenticationFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        //if (routerValidator.isSecured(request)) {
             logger.info("Requesting resource...");
             if (!request.getHeaders().containsKey("Authorization")) {
                 logger.warn("Headers don't contain 'Authorization' header");
@@ -71,7 +70,6 @@ public class AuthenticationFilter implements WebFilter {
                 logger.warn("JWT token is unreadable or expired");
                 return onUnauthorized(exchange);
             }
-        //}
         var roles = jwtUtil.getRolesFromToken(token); var userDetails = jwtUtil.getUserDetailsFromToken(token, roles);
         var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         authentication.setDetails(userDetails);

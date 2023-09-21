@@ -25,7 +25,4 @@ public class CommunityMemberRole {
     private RoleType name;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     private List<CommunityMember> members;
-    public static CommunityMemberRole roleBy(RoleType roleType){
-        return new CommunityMemberRole(roleType);
-    }
 }

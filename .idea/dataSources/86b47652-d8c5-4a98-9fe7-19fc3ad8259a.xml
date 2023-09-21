@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>35196</IntrospectionStateNumber>
+      <IntrospectionStateNumber>36219</IntrospectionStateNumber>
       <ServerVersion>15.1</ServerVersion>
-      <StartupTime>1692822883</StartupTime>
+      <StartupTime>1695135426</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -229,7 +229,7 @@ false America/Rio_Branco
 false America/Rosario
 true America/Santa_Isabel
 false America/Santarem
-false America/Santiago
+true America/Santiago
 false America/Santo_Domingo
 false America/Sao_Paulo
 true America/Scoresbysund
@@ -427,7 +427,7 @@ false CHAST
 false CHUT
 false CKT
 true CLST
-false CLT
+true CLT
 false COT
 false CST
 true CST6CDT
@@ -440,13 +440,13 @@ true Canada/Newfoundland
 true Canada/Pacific
 false Canada/Saskatchewan
 false Canada/Yukon
-false Chile/Continental
-false Chile/EasterIsland
+true Chile/Continental
+true Chile/EasterIsland
 true Cuba
 false DAVT
 false DDUT
-false EASST
-false EAST
+true EASST
+true EAST
 false EAT
 true EDT
 true EEST
@@ -683,7 +683,7 @@ false Pacific/Auckland
 false Pacific/Bougainville
 false Pacific/Chatham
 false Pacific/Chuuk
-false Pacific/Easter
+true Pacific/Easter
 false Pacific/Efate
 false Pacific/Enderbury
 false Pacific/Fakaofo
@@ -801,7 +801,7 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>35196</IntrospectionStateNumber>
+      <IntrospectionStateNumber>36219</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -809,14 +809,14 @@ false Zulu
       <ObjectId>24590</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="4" parent="1" name="pg_database_owner">
+    <role id="4" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="5" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="5" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
-    </role>
-    <role id="6" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
+    <role id="6" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
     <role id="7" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
@@ -824,29 +824,29 @@ false Zulu
 3375
 3377</RoleGrants>
     </role>
-    <role id="8" parent="1" name="pg_read_all_settings">
+    <role id="8" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="9" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="9" parent="1" name="pg_read_all_stats">
+    <role id="10" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
-    </role>
-    <role id="10" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
     </role>
     <role id="11" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
     </role>
-    <role id="12" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="14" parent="1" name="pg_signal_backend">
+    <role id="12" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="15" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="13" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+    </role>
+    <role id="14" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="15" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <role id="16" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
@@ -4232,14 +4232,22 @@ false Zulu
     <schema id="263" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>35196</IntrospectionStateNumber>
-      <IntrospectionTimestamp>2023-08-27.19:34:26.816</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-08-27.23:34:27</LocalIntrospectionTimestamp>
+      <IntrospectionStateNumber>36219</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2023-09-20.23:03:46.620</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-09-21.03:03:46</LocalIntrospectionTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="264" parent="263" name="people_id_seq">
+    <sequence id="264" parent="263" name="communities_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>218847</ObjectId>
+      <SequenceIdentity>1(51)+50</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>36196</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="265" parent="263" name="people_id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>65551</ObjectId>
       <SequenceIdentity>1(3)</SequenceIdentity>
@@ -4247,13 +4255,227 @@ false Zulu
       <StateNumber>1420</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="265" parent="263" name="people">
+    <sequence id="266" parent="263" name="roles_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>218848</ObjectId>
+      <SequenceIdentity>1(101)+50</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>36197</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="267" parent="263" name="communities">
+      <ObjectId>218849</ObjectId>
+      <StateNumber>36207</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="268" parent="263" name="community_categories">
+      <ObjectId>218856</ObjectId>
+      <StateNumber>36207</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="269" parent="263" name="community_members">
+      <ObjectId>218861</ObjectId>
+      <StateNumber>36208</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="270" parent="263" name="people">
       <ObjectId>65552</ObjectId>
       <StateNumber>1420</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="266" parent="265" name="id">
+    <table id="271" parent="263" name="posts_communities">
+      <ObjectId>218866</ObjectId>
+      <StateNumber>36209</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="272" parent="263" name="roles">
+      <ObjectId>218871</ObjectId>
+      <StateNumber>36210</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="273" parent="263" name="users_roles">
+      <ObjectId>218876</ObjectId>
+      <StateNumber>36210</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="274" parent="267" name="id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36198</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="275" parent="267" name="description">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36198</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="276" parent="267" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>36198</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="277" parent="267" name="required_karma">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>36198</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="278" parent="267" name="tag">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>36198</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="279" parent="267" name="communities_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218854</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36198</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="280" parent="267" name="uk_ls2bij64m0j4r4vru8t3tib0l">
+      <ColNames>tag</ColNames>
+      <ObjectId>218879</ObjectId>
+      <StateNumber>36204</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="281" parent="267" name="communities_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218855</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36198</StateNumber>
+      <UnderlyingIndexId>218854</UnderlyingIndexId>
+    </key>
+    <key id="282" parent="267" name="uk_ls2bij64m0j4r4vru8t3tib0l">
+      <ObjectId>218880</ObjectId>
+      <StateNumber>36204</StateNumber>
+      <UnderlyingIndexId>218879</UnderlyingIndexId>
+    </key>
+    <column id="283" parent="268" name="community_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36199</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="284" parent="268" name="category_name">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36199</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <foreign-key id="285" parent="268" name="fk5at69t7mq5d1p7vvx61iyma2">
+      <ColNames>community_id</ColNames>
+      <ObjectId>218885</ObjectId>
+      <StateNumber>36207</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>218849</RefTableId>
+    </foreign-key>
+    <index id="286" parent="268" name="community_categories_pkey">
+      <ColNames>community_id
+category_name</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218859</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36199</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>
+100</CollationIds>
+      <CollationParentNames>
+pg_catalog</CollationParentNames>
+      <CollationNames>
+default</CollationNames>
+    </index>
+    <key id="287" parent="268" name="community_categories_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218860</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36199</StateNumber>
+      <UnderlyingIndexId>218859</UnderlyingIndexId>
+    </key>
+    <column id="288" parent="269" name="community_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36200</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="289" parent="269" name="user_id">
+      <DasType>uuid|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36200</StateNumber>
+      <TypeId>2950</TypeId>
+    </column>
+    <column id="290" parent="269" name="username">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>36200</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <foreign-key id="291" parent="269" name="fkqn9g17tqcwnoy41o2am9fnlep">
+      <ColNames>community_id</ColNames>
+      <ObjectId>218890</ObjectId>
+      <StateNumber>36208</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>218849</RefTableId>
+    </foreign-key>
+    <index id="292" parent="269" name="community_members_pkey">
+      <ColNames>community_id
+user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218864</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36200</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="293" parent="269" name="uk_n9qx8p29nlijh5hw5xeylwd1a">
+      <ColNames>username</ColNames>
+      <ObjectId>218881</ObjectId>
+      <StateNumber>36205</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="294" parent="269" name="community_members_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218865</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36200</StateNumber>
+      <UnderlyingIndexId>218864</UnderlyingIndexId>
+    </key>
+    <key id="295" parent="269" name="uk_n9qx8p29nlijh5hw5xeylwd1a">
+      <ObjectId>218882</ObjectId>
+      <StateNumber>36205</StateNumber>
+      <UnderlyingIndexId>218881</UnderlyingIndexId>
+    </key>
+    <column id="296" parent="270" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;people_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4262,25 +4484,25 @@ false Zulu
       <SequenceId>65551</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="267" parent="265" name="name">
+    <column id="297" parent="270" name="name">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>1420</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="268" parent="265" name="age">
+    <column id="298" parent="270" name="age">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
       <StateNumber>1420</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="269" parent="265" name="address">
+    <column id="299" parent="270" name="address">
       <DasType>text|0s</DasType>
       <Position>4</Position>
       <StateNumber>1420</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="270" parent="265" name="people_pk">
+    <index id="300" parent="270" name="people_pk">
       <ColNames>id</ColNames>
       <ObjectId>65558</ObjectId>
       <Primary>1</Primary>
@@ -4288,11 +4510,130 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="271" parent="265" name="people_pk">
+    <key id="301" parent="270" name="people_pk">
       <ObjectId>65559</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1420</StateNumber>
       <UnderlyingIndexId>65558</UnderlyingIndexId>
     </key>
+    <column id="302" parent="271" name="community_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36201</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="303" parent="271" name="id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36201</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="304" parent="271" name="fk3mh29uqc6x51bs9dbka6o278w">
+      <ColNames>community_id</ColNames>
+      <ObjectId>218895</ObjectId>
+      <StateNumber>36209</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>218849</RefTableId>
+    </foreign-key>
+    <index id="305" parent="271" name="posts_communities_pkey">
+      <ColNames>community_id
+id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218869</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36201</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="306" parent="271" name="posts_communities_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218870</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36201</StateNumber>
+      <UnderlyingIndexId>218869</UnderlyingIndexId>
+    </key>
+    <column id="307" parent="272" name="id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36202</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="308" parent="272" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36202</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="309" parent="272" name="roles_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218874</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36202</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="310" parent="272" name="uk_ofx66keruapi6vyqpv6f2or37">
+      <ColNames>name</ColNames>
+      <ObjectId>218883</ObjectId>
+      <StateNumber>36206</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="311" parent="272" name="roles_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>218875</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>36202</StateNumber>
+      <UnderlyingIndexId>218874</UnderlyingIndexId>
+    </key>
+    <key id="312" parent="272" name="uk_ofx66keruapi6vyqpv6f2or37">
+      <ObjectId>218884</ObjectId>
+      <StateNumber>36206</StateNumber>
+      <UnderlyingIndexId>218883</UnderlyingIndexId>
+    </key>
+    <column id="313" parent="273" name="members_community_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>36203</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="314" parent="273" name="members_user_id">
+      <DasType>uuid|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>36203</StateNumber>
+      <TypeId>2950</TypeId>
+    </column>
+    <column id="315" parent="273" name="roles_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>36203</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="316" parent="273" name="fkqe9pkc25cbaytp4sl03v48d2v">
+      <ColNames>members_community_id
+members_user_id</ColNames>
+      <ObjectId>218905</ObjectId>
+      <StateNumber>36211</StateNumber>
+      <RefKeyColPositions>1,2</RefKeyColPositions>
+      <RefTableId>218861</RefTableId>
+    </foreign-key>
+    <foreign-key id="317" parent="273" name="fka62j07k5mhgifpp955h37ponj">
+      <ColNames>roles_id</ColNames>
+      <ObjectId>218900</ObjectId>
+      <StateNumber>36210</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>218871</RefTableId>
+    </foreign-key>
   </database-model>
 </dataSource>

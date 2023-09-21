@@ -1,6 +1,6 @@
 package com.cloud.communitiesservice.service.base;
 
-import com.cloud.communitiesservice.dto.DtoWithId;
+import com.cloud.communitiesservice.dto.base.DtoWithId;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;

@@ -1,7 +1,6 @@
 package com.cloud.usersservice.filter;
 
 import com.cloud.usersservice.util.JwtUtilService;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -39,7 +38,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
         logger.info("Authorizing request with JWT token " + token);
-
         if(SecurityContextHolder.getContext().getAuthentication() == null){
                 var roles = jwtService.getRolesFromToken(token);
                 var userDetails = jwtService.getUserDetailsFromToken(token, roles);
@@ -48,7 +46,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 logger.info("Request is authenticated.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            logger.info("Request is authenticated");
+            logger.info("Request is already authenticated");
         }
         filterChain.doFilter(request, response);
     }

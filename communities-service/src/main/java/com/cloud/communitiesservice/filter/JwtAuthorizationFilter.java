@@ -1,5 +1,6 @@
 package com.cloud.communitiesservice.filter;
 
+import com.cloud.communitiesservice.repository.CommunitiesMembersRepository;
 import com.cloud.communitiesservice.util.JwtUtilService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,12 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerMapping;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.*;
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final JwtUtilService jwtService;
@@ -38,16 +42,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
         logger.info("Authorizing request with JWT token " + token);
-
         if(SecurityContextHolder.getContext().getAuthentication() == null){
                 var roles = jwtService.getRolesFromToken(token);
                 var userDetails = jwtService.getUserDetailsFromToken(token, roles);
                 var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authentication.setDetails(userDetails);
                 logger.info("Request is authenticated.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            logger.info("Request is authenticated");
+            logger.info("Request is already authenticated");
         }
         filterChain.doFilter(request, response);
     }

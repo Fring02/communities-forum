@@ -1,7 +1,7 @@
 package com.cloud.communitiesservice.client;
 
 import com.cloud.communitiesservice.dto.member.MemberDto;
-import com.cloud.communitiesservice.dto.member.UserRolesDto;
+import com.cloud.communitiesservice.dto.member.MemberRolesResponseDto;
 import com.cloud.communitiesservice.dto.member.MembersListDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +20,5 @@ public interface UsersClient {
     @GetMapping("/api/v1/users/{id}")
     ResponseEntity<MemberDto> getById(@PathVariable UUID id);
     @GetMapping("/api/v1/users/username/{username}/roles")
-    ResponseEntity<UserRolesDto> getUserRoles(@PathVariable("username") String username);
+    ResponseEntity<MemberRolesResponseDto> getUserRoles(@PathVariable("username") String username);
 }

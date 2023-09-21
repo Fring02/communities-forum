@@ -6,4 +6,5 @@ import java.util.Set;
 
 public interface CommunityWithCategoriesViewDto extends CommunityViewDto {
     Set<String> getCategories();
+    long getRequiredKarma();
 }

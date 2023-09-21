@@ -1,13 +1,12 @@
 package com.cloud.postsservice.service.base;
 
-import com.cloud.postsservice.dto.DtoWithId;
+import com.cloud.postsservice.dto.base.DtoWithId;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 public interface CrudService<TId extends Serializable, TViewDto extends DtoWithId<TId>, TFullViewDto extends TViewDto,

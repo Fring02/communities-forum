@@ -25,12 +25,14 @@ public class Community {
     private String tag;
     @Column(name = "description", nullable = false)
     private String description;
+    @Column(name = "required_karma", nullable = false)
+    private long requiredKarma;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "community")
     private Set<CommunityPost> posts;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "community")
     private Set<CommunityMember> members;
     @ElementCollection
-    @CollectionTable(name = "posts_categories", joinColumns = @JoinColumn(name = "community_id"))
+    @CollectionTable(name = "community_categories", joinColumns = @JoinColumn(name = "community_id"))
     @Column(name = "category_name", nullable = false)
     private Set<String> categories;
 }
