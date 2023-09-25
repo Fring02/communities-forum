@@ -32,6 +32,7 @@
         <module>communities-service</module>
         <module>api-gateway</module>
         <module>service-discovery</module>
+        <module>notifications-service</module>
     </modules>
 
     <dependencyManagement>

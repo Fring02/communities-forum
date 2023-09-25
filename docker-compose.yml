@@ -1,0 +1,194 @@
+version: '3.5'
+services:
+  refresh-config-broker:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  config-server:
+    container_name: config-server
+    build: config-server
+    ports:
+      - "5000:5000"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - refresh-config-broker
+      - service-discovery
+
+  service-discovery:
+    container_name: service-discovery
+    build: service-discovery
+    restart: on-failure
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - refresh-config-broker
+    ports:
+      - "5001:5001"
+
+  users-db:
+    container_name: users-db
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  users-service:
+    container_name: users-service
+    build: users-service
+    ports:
+      - "5002:5002"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      config-server:
+        condition: service_started
+      service-discovery:
+        condition: service_started
+      users-db:
+        condition: service_healthy
+
+  posts-db:
+    container_name: posts-db
+    image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "6000:5432"
+    environment:
+      - POSTGRES_HOST=posts-db
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=posts-db
+    volumes:
+      - postgres-data-posts:/var/lib/postgresql/data
+
+  posts-service:
+    container_name: posts-service
+    build: posts-service
+    ports:
+      - "5004:5004"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      config-server:
+        condition: service_started
+      service-discovery:
+        condition: service_started
+      posts-db:
+        condition: service_healthy
+
+  communities-db:
+    container_name: communities-db
+    image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "7000:5432"
+    environment:
+      - POSTGRES_HOST=communities-db
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=communities-db
+    volumes:
+      - postgres-data-communities:/var/lib/postgresql/data
+
+  communities-service:
+    container_name: communities-service
+    build: communities-service
+    ports:
+      - "5005:5005"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      config-server:
+        condition: service_started
+      service-discovery:
+        condition: service_started
+      communities-db:
+        condition: service_healthy
+
+  auth-db:
+    container_name: auth-db
+    image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "8000:5432"
+    environment:
+      - POSTGRES_HOST=auth-db
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=auth-db
+    volumes:
+      - postgres-data-auth:/var/lib/postgresql/data
+
+  auth-service:
+    container_name: auth-service
+    build: authorization-service
+    ports:
+      - "5003:5003"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      config-server:
+        condition: service_started
+      service-discovery:
+        condition: service_started
+      auth-db:
+        condition: service_healthy
+      users-service:
+        condition: service_started
+
+  api-gateway:
+    container_name: api-gateway
+    build: api-gateway
+    ports:
+      - "5006:5006"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - config-server
+      - service-discovery
+
+  notifications-db:
+    container_name: notifications-db
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  notifications-service:
+    container_name: notifications-service
+    build: notifications-service
+    ports:
+      - "5007:5007"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - config-server
+      - service-discovery
+      - notifications-db
+
+volumes:
+  postgres-data-posts:
+  postgres-data-communities:
+  postgres-data-auth:
