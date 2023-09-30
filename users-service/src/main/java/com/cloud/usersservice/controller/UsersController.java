@@ -32,8 +32,8 @@ public class UsersController {
     @GetMapping
     @RolesAllowed("superadmin")
     @CrossOrigin("http://api-gateway")
-    public ResponseEntity<?> getAll(@RequestParam("page") Optional<Integer> pageOpt,
-                                    @RequestParam("pageCount") Optional<Integer> pageCountOpt){
+    public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Optional<Integer> pageOpt,
+                                    @RequestParam(value = "pageCount", required = false) Optional<Integer> pageCountOpt){
         if(pageOpt.isPresent() && pageCountOpt.isPresent()){
             int page = pageOpt.get(), pageCount = pageCountOpt.get();
             if(page <= 0 || pageCount <= 0) return ResponseEntity.badRequest().body("Page or page count must be greater than 0");
@@ -54,7 +54,7 @@ public class UsersController {
     @GetMapping("/{id}/exists")
     @CrossOrigin({"http://communities-service", "http://posts-service"})
     public ResponseEntity<Boolean> userExistsById(@PathVariable("id") String id){
-        if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body(false);
+        if(!StringUtils.hasLength(id)) return ResponseEntity.ok().body(false);
         return ResponseEntity.ok(service.existsById(UUID.fromString(id)));
     }
     @GetMapping("/{id}")
