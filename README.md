@@ -1,6 +1,6 @@
 # microservices-forum
 ***
-This is a microservices-based project for a forum service which allows to create communities and write posts, share thoughts and ideas in posts and provides networking opportunities.
+This is a microservices-based REST API solution for a forum service which allows to create communities and write posts, share thoughts and ideas in posts and provides networking opportunities.
 ---
 >The technologies used for the development:
 >
