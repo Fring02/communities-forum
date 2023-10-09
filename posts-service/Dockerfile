@@ -1,6 +1,13 @@
-FROM openjdk:19-alpine
+FROM maven:latest as maven
 VOLUME /tmp
+COPY pom.xml /app/
+COPY ./posts-service /app/posts-service
+WORKDIR /app/posts-service
+RUN mvn -pl . -DskipTests clean package
+
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /posts-service
+ARG JAR_FILE=posts-service-0.0.1-SNAPSHOT
 EXPOSE 5004
-ARG JAR_FILE=target/posts-service-0.0.1-SNAPSHOT.jar
-ADD ${JAR_FILE} posts-service.jar
-ENTRYPOINT ["java","-jar","/posts-service.jar"]
+COPY --from=maven /app/posts-service/target/${JAR_FILE}.jar .
+ENTRYPOINT ["java","-jar","posts-service-0.0.1-SNAPSHOT.jar"]

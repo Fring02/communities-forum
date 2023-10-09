@@ -1,6 +1,13 @@
-FROM openjdk:19-alpine
+FROM maven:latest as maven
 VOLUME /tmp
+COPY pom.xml /app/
+COPY ./communities-service /app/communities-service
+WORKDIR /app/communities-service
+RUN mvn -pl . -DskipTests clean package
+
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /communities-service
+ARG JAR_FILE=communities-service-0.0.1-SNAPSHOT
 EXPOSE 5005
-ARG JAR_FILE=target/communities-service-0.0.1-SNAPSHOT.jar
-ADD ${JAR_FILE} communities-service.jar
-ENTRYPOINT ["java","-jar","/communities-service.jar"]
+COPY --from=maven /app/communities-service/target/${JAR_FILE}.jar .
+ENTRYPOINT ["java","-jar","communities-service-0.0.1-SNAPSHOT.jar"]

@@ -11,7 +11,9 @@ services:
 
   config-server:
     container_name: config-server
-    build: config-server
+    build:
+      context: .
+      dockerfile: ./config-server/Dockerfile
     ports:
       - "5000:5000"
     environment:
@@ -22,7 +24,9 @@ services:
 
   service-discovery:
     container_name: service-discovery
-    build: service-discovery
+    build:
+      context: .
+      dockerfile: ./service-discovery/Dockerfile
     restart: on-failure
     environment:
       - SPRING_PROFILES_ACTIVE=dev
@@ -45,7 +49,9 @@ services:
 
   users-service:
     container_name: users-service
-    build: users-service
+    build:
+      context: .
+      dockerfile: ./users-service/Dockerfile
     ports:
       - "5002:5002"
     environment:
@@ -78,7 +84,9 @@ services:
 
   posts-service:
     container_name: posts-service
-    build: posts-service
+    build:
+      context: .
+      dockerfile: ./posts-service/Dockerfile
     ports:
       - "5004:5004"
     environment:
@@ -111,7 +119,9 @@ services:
 
   communities-service:
     container_name: communities-service
-    build: communities-service
+    build:
+      context: .
+      dockerfile: ./communities-service/Dockerfile
     ports:
       - "5005:5005"
     environment:
@@ -144,7 +154,9 @@ services:
 
   auth-service:
     container_name: auth-service
-    build: authorization-service
+    build:
+      context: .
+      dockerfile: ./authorization-service/Dockerfile
     ports:
       - "5003:5003"
     environment:
@@ -161,7 +173,9 @@ services:
 
   api-gateway:
     container_name: api-gateway
-    build: api-gateway
+    build:
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
     ports:
       - "5006:5006"
     environment:
@@ -178,7 +192,9 @@ services:
 
   notifications-service:
     container_name: notifications-service
-    build: notifications-service
+    build:
+      context: .
+      dockerfile: ./notifications-service/Dockerfile
     ports:
       - "5007:5007"
     environment:
