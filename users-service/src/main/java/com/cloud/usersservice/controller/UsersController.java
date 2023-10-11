@@ -11,6 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +63,7 @@ public class UsersController {
     @GetMapping("/{id}")
     @RolesAllowed("user")
     @CrossOrigin("http://api-gateway")
+    @Cacheable(key = "#id", value = "users")
     public ResponseEntity<?> getById(@PathVariable("id") String id){
         if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body("Id is invalid");
         UUID uuid;
@@ -86,6 +90,7 @@ public class UsersController {
     }
     @GetMapping("/username/{username}/roles")
     @CrossOrigin({"http://communities-service", "http://authorization-service"})
+    @Cacheable(key = "#username", value = "roles")
     public ResponseEntity<?> getRolesByUsername(@PathVariable String username){
         if(!StringUtils.hasLength(username)) return ResponseEntity.badRequest().body("Username is invalid");
         return ResponseEntity.of(service.getRolesByUsername(username));
@@ -115,6 +120,7 @@ public class UsersController {
     @DeleteMapping("/{id}")
     @RolesAllowed("superadmin")
     @CrossOrigin("http://api-gateway")
+    @CacheEvict(key = "#id", value = "users")
     public ResponseEntity<?> deleteById(@PathVariable("id") String id){
         if(!StringUtils.hasLength(id)) return ResponseEntity.badRequest().body("Id is invalid");
         UUID uuid;

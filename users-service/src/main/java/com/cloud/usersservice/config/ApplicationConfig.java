@@ -4,11 +4,13 @@ import com.cloud.usersservice.util.DatabaseSeeder;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
+@EnableCaching
 public class ApplicationConfig {
     @Bean
     public CommandLineRunner commandLineRunner(DatabaseSeeder seeder){

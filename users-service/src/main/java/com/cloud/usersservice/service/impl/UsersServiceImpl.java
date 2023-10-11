@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,10 +32,12 @@ public class UsersServiceImpl implements UsersService {
     private final RabbitTemplate rabbitTemplate;
     @Value("${notifications.exchange.name}")
     private String exchangeName;
-    public UsersServiceImpl(UsersRepository repository, ModelMapper mapper, RabbitTemplate rabbitTemplate) {
+    private final CacheManager cacheManager;
+    public UsersServiceImpl(UsersRepository repository, ModelMapper mapper, RabbitTemplate rabbitTemplate, CacheManager cacheManager) {
         this.repository = Objects.requireNonNull(repository);
         this.mapper = mapper;
         this.rabbitTemplate = rabbitTemplate;
+        this.cacheManager = cacheManager;
     }
     @Transactional(readOnly = true)
     public Collection<UserViewDto> getAll(){
@@ -111,6 +114,11 @@ public class UsersServiceImpl implements UsersService {
     public void deleteById(UUID id) throws EntityNotFoundException {
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         if(!repository.existsById(id)) throw new EntityNotFoundException("User with id " + id + " doesn't exist");
+        repository.findById(id).ifPresent(u -> {
+            Objects.requireNonNull(cacheManager.getCache("roles"))
+                    .evictIfPresent(u.getUserName());
+            logger.info("Evicted from users cache");
+        });
         logger.info("Deleting user by id " + id);
         repository.deleteById(id);
     }

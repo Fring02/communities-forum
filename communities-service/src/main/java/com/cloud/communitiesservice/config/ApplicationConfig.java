@@ -3,7 +3,6 @@ package com.cloud.communitiesservice.config;
 import com.cloud.communitiesservice.util.DatabaseSeeder;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -134,6 +134,12 @@ services:
       communities-db:
         condition: service_healthy
 
+  communities-cache:
+    container_name: communities-cache
+    image: redis:latest
+    ports:
+      - "6380:6380"
+
   auth-db:
     container_name: auth-db
     image: postgres:latest
