@@ -8,8 +8,6 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,7 +45,6 @@ public class CommunitiesController {
         return ResponseEntity.ok(new CommunitiesListDto(communities, usersCount));
     }
     @GetMapping("/{id}")
-    @Cacheable(key = "#id", value = "communities")
     public ResponseEntity<?> getById(@PathVariable("id") long id, @RequestParam Optional<Boolean> karmaOnly) {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         if(karmaOnly.isPresent() && karmaOnly.get()) {
@@ -101,7 +98,6 @@ public class CommunitiesController {
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("@communitiesAuthorizationHandler.authorizeUserOnCommunity(#id, authentication, {'admin'})")
-    @CacheEvict(key = "#id", value = "communities")
     public ResponseEntity<?> deleteById(@PathVariable("id") long id) throws EntityNotFoundException {
         if(id <= 0) return ResponseEntity.badRequest().body("Id is invalid");
         service.deleteById(id);

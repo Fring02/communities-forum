@@ -22,6 +22,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -135,6 +137,7 @@ public class CommunitiesServiceImpl implements CommunitiesService {
     }
 
     @Override
+    @Cacheable(key = "#id", value = "communities")
     public Optional<CommunityFullViewWrapperDto> getById(Long id) {
         if(id <= 0) return Optional.empty();
         var community = repository.findById(id, CommunityWithCategoriesViewDto.class);
@@ -211,6 +214,7 @@ public class CommunitiesServiceImpl implements CommunitiesService {
     }
 
     @Override
+    @CacheEvict(key = "#id", value = "communities")
     public void deleteById(Long id) throws EntityNotFoundException {
         if(id <= 0) throw new EntityNotFoundException("Community with id " + id + " is already deleted");
         logger.info("Deleting community with id " + id);

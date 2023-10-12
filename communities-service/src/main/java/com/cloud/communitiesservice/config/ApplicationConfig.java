@@ -4,11 +4,15 @@ import com.cloud.communitiesservice.util.DatabaseSeeder;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
+@EnableCaching
 public class ApplicationConfig {
 
     @Bean
@@ -31,5 +35,9 @@ public class ApplicationConfig {
         filter.setIncludeHeaders(true);
         filter.setAfterMessagePrefix("Request details: ");
         return filter;
+    }
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("communities");
     }
 }
