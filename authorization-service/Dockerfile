@@ -1,4 +1,4 @@
-FROM maven:latest as maven
+FROM maven:3-eclipse-temurin-17-alpine as maven
 VOLUME /tmp
 COPY pom.xml /app/
 COPY ./authorization-service /app/authorization-service

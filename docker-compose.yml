@@ -10,6 +10,7 @@ services:
       - "15672:15672"
 
   config-server:
+    #image: fring02/communities-forum
     container_name: config-server
     build:
       context: .
@@ -23,6 +24,7 @@ services:
       - service-discovery
 
   service-discovery:
+    #image: fring02/communities-forum
     container_name: service-discovery
     build:
       context: .
@@ -48,6 +50,7 @@ services:
       retries: 10
 
   users-service:
+    #image: fring02/communities-forum
     container_name: users-service
     build:
       context: .
@@ -83,6 +86,7 @@ services:
       - postgres-data-posts:/var/lib/postgresql/data
 
   posts-service:
+    #image: fring02/communities-forum
     container_name: posts-service
     build:
       context: .
@@ -118,6 +122,7 @@ services:
       - postgres-data-communities:/var/lib/postgresql/data
 
   communities-service:
+    #image: fring02/communities-forum
     container_name: communities-service
     build:
       context: .
@@ -159,6 +164,7 @@ services:
       - postgres-data-auth:/var/lib/postgresql/data
 
   auth-service:
+    #image: fring02/communities-forum
     container_name: auth-service
     build:
       context: .
@@ -178,6 +184,7 @@ services:
         condition: service_started
 
   api-gateway:
+    #image: fring02/communities-forum
     container_name: api-gateway
     build:
       context: .
@@ -194,9 +201,10 @@ services:
     container_name: notifications-db
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "6380:6380"
 
   notifications-service:
+    #image: fring02/communities-forum
     container_name: notifications-service
     build:
       context: .
