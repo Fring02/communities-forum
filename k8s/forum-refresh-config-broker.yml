@@ -1,0 +1,57 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: refresh-config-broker
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: refresh-config-broker
+spec:
+  type: NodePort
+  selector:
+    app: refresh-config-broker
+  ports:
+    - port: 5672
+      targetPort: 5672
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: refresh-config-broker
+spec:
+  selector:
+    matchLabels:
+      app: refresh-config-broker
+  template:
+    metadata:
+      labels:
+        app: refresh-config-broker
+    spec:
+      containers:
+        - name: refresh-config-broker
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 5672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: guest
+            - name: RABBITMQ_DEFAULT_PASS
+              value: guest
+          volumeMounts:
+            - name: refresh-config-broker
+              mountPath: /data/db
+      volumes:
+        - name: refresh-config-broker
+          persistentVolumeClaim:
+            claimName: refresh-config-broker

@@ -1,0 +1,51 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-service
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifications-service
+  template:
+    metadata:
+      labels:
+        app: notifications-service
+    spec:
+      containers:
+        - name: notifications-service
+          image: fring02/communities-forum:notifications-service
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "64Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 5007
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-service
+spec:
+  selector:
+    app: notifications-service
+  ports:
+    - port: 5007
+      targetPort: 5007
+  type: LoadBalancer

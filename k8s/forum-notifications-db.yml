@@ -1,0 +1,51 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: notifications-db
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-db
+spec:
+  selector:
+    app: notifications-db
+  ports:
+    - port: 6380
+      targetPort: 6380
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-db
+spec:
+  selector:
+    matchLabels:
+      app: notifications-db
+  template:
+    metadata:
+      labels:
+        app: notifications-db
+    spec:
+      containers:
+        - name: notifications-db
+          image: redis:latest
+          ports:
+            - containerPort: 6380
+          volumeMounts:
+            - name: notifications-db
+              mountPath: /redis/cache
+      volumes:
+        - name: notifications-db
+          persistentVolumeClaim:
+            claimName: notifications-db

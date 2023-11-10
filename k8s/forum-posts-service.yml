@@ -1,0 +1,51 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-service
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts-service
+  template:
+    metadata:
+      labels:
+        app: posts-service
+    spec:
+      containers:
+        - name: posts-service
+          image: fring02/communities-forum:posts-service
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 5004
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+spec:
+  selector:
+    app: posts-service
+  ports:
+    - port: 5004
+      targetPort: 5004
+  type: LoadBalancer

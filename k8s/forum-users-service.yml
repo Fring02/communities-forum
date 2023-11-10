@@ -1,0 +1,59 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-service
+  template:
+    metadata:
+      labels:
+        app: users-service
+    spec:
+      containers:
+        - name: users-service
+          image: fring02/communities-forum:users-service
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 5002
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+              
+        - name: users-db
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:  
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+spec:
+  selector:
+    app: users-service
+  ports:
+    - port: 5002
+      targetPort: 5002
+  type: LoadBalancer

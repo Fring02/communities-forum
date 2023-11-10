@@ -1,0 +1,51 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: communities-service
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: communities-service
+  template:
+    metadata:
+      labels:
+        app: communities-service
+    spec:
+      containers:
+        - name: communities-service
+          image: fring02/communities-forum:communities-service
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 5005
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: communities-service
+spec:
+  selector:
+    app: communities-service
+  ports:
+    - port: 5005
+      targetPort: 5005
+  type: LoadBalancer

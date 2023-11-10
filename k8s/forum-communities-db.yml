@@ -1,0 +1,60 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: communities-db
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: communities-db
+spec:
+  selector:
+    app: communities-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: communities-db
+spec:
+  selector:
+    matchLabels:
+      app: communities-db
+  template:
+    metadata:
+      labels:
+        app: communities-db
+    spec:
+      containers:
+        - name: communities-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_HOST
+              value: communities-db
+            - name: PGUSER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: communities-db
+          volumeMounts:
+            - name: communities-db
+              mountPath: /data/db
+      volumes:
+        - name: communities-db
+          persistentVolumeClaim:
+            claimName: communities-db

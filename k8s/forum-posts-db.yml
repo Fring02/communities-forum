@@ -1,0 +1,60 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: posts-db
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-db
+spec:
+  selector:
+    app: posts-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-db
+spec:
+  selector:
+    matchLabels:
+      app: posts-db
+  template:
+    metadata:
+      labels:
+        app: posts-db
+    spec:
+      containers:
+        - name: posts-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_HOST
+              value: posts-db
+            - name: PGUSER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: posts-db
+          volumeMounts:
+            - name: posts-db
+              mountPath: /data/db
+      volumes:
+        - name: posts-db
+          persistentVolumeClaim:
+            claimName: posts-db

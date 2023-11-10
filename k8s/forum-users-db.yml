@@ -1,0 +1,54 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: users-db
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-db
+spec:
+  selector:
+    app: users-db
+  ports:
+    - port: 3306
+      targetPort: 3306
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-db
+spec:
+  selector:
+    matchLabels:
+      app: users-db
+  template:
+    metadata:
+      labels:
+        app: users-db
+    spec:
+      containers:
+        - name: users-db
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+          volumeMounts:
+            - name: users-db
+              mountPath: /data/db
+      volumes:
+        - name: users-db
+          persistentVolumeClaim:
+            claimName: users-db

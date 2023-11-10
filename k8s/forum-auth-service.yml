@@ -1,0 +1,51 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authorization-service
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authorization-service
+  template:
+    metadata:
+      labels:
+        app: authorization-service
+    spec:
+      containers:
+        - name: authorization-service
+          image: fring02/communities-forum:auth-service
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 5003
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+#Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authorization-service
+spec:
+  selector:
+    app: authorization-service
+  ports:
+    - port: 5003
+      targetPort: 5003
+  type: LoadBalancer

@@ -1,0 +1,60 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: auth-db
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+#Service spec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-db
+spec:
+  selector:
+    app: auth-db
+  ports:
+    - port: 5432
+      targetPort: 8000
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-db
+spec:
+  selector:
+    matchLabels:
+      app: auth-db
+  template:
+    metadata:
+      labels:
+        app: auth-db
+    spec:
+      containers:
+        - name: auth-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_HOST
+              value: auth-db
+            - name: PGUSER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: auth-db
+          volumeMounts:
+            - name: auth-db
+              mountPath: /data/db
+      volumes:
+        - name: auth-db
+          persistentVolumeClaim:
+            claimName: auth-db

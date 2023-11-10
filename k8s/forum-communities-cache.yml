@@ -1,0 +1,53 @@
+#Persistent volume spec
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: communities-cache
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+#Deployment spec
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: communities-cache
+spec:
+  selector:
+    matchLabels:
+      app: communities-cache
+  template:
+    metadata:
+      labels:
+        app: communities-cache
+    spec:
+      containers:
+        - name: communities-cache
+          image: redis:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: communities-cache
+              mountPath: /redis/cache
+      volumes:
+        - name: communities-cache
+          persistentVolumeClaim:
+            claimName: communities-cache
