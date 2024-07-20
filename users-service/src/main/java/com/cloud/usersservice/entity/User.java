@@ -23,6 +23,14 @@ public class User {
         this.karma = karma;
         this.roles = roles;
     }
+    public User(String firstName, String lastName, String email, String userName, int karma, List<String> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userName = userName;
+        this.karma = karma;
+        this.roles = roles;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
