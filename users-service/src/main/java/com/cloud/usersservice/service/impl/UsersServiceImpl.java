@@ -48,7 +48,7 @@ public class UsersServiceImpl implements UsersService {
     public Page<UserViewDto> getAll(int page, int pageCount){
         if(page <= 0 || pageCount <= 0) throw new IllegalArgumentException("Number of items per page is invalid");
         page--;
-        Pageable pageable = PageRequest.of(page, pageCount).withSort(Sort.by("email").ascending());
+        Pageable pageable = PageRequest.of(page, pageCount).withSort(Sort.by("userName").ascending());
         logger.info(String.format("Fetching %d users by page %d...", pageCount, page));
         return repository.findBy(UserViewDto.class, pageable);
     }
@@ -63,7 +63,6 @@ public class UsersServiceImpl implements UsersService {
         if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
         return repository.existsById(id);
     }
-
     @Override
     @Transactional(readOnly = true)
     public int getKarmaById(UUID id) {
@@ -71,7 +70,6 @@ public class UsersServiceImpl implements UsersService {
         if(result == null) throw new EntityNotFoundException("User with id " + id + " not found");
         return result;
     }
-
     @Override
     @Transactional(readOnly = true)
     public Collection<UserViewDto> getByIds(Collection<UUID> ids) {
@@ -97,7 +95,7 @@ public class UsersServiceImpl implements UsersService {
         return mapper.map(user, UserCreatedDto.class);
     }
     @Transactional
-    public void update(UserUpdateDto dto) throws EntityNotFoundException{
+    public void update(UserUpdateDto dto) throws EntityNotFoundException {
         if(dto.getId() == null) throw new IllegalArgumentException("Passed user id is invalid");
         repository.findById(dto.getId()).ifPresentOrElse(user -> {
             if(StringUtils.hasLength(dto.getUserName()) && !dto.getUserName().equals(user.getUserName()))
@@ -112,7 +110,7 @@ public class UsersServiceImpl implements UsersService {
     }
     @Transactional
     public void deleteById(UUID id) throws EntityNotFoundException {
-        if(id == null) throw new IllegalArgumentException("Passed user id is invalid");
+        if(id == null || id.getLeastSignificantBits() + id.getMostSignificantBits() == 0) throw new IllegalArgumentException("Passed user id is invalid");
         if(!repository.existsById(id)) throw new EntityNotFoundException("User with id " + id + " doesn't exist");
         repository.findById(id).ifPresent(u -> {
             Objects.requireNonNull(cacheManager.getCache("roles"))

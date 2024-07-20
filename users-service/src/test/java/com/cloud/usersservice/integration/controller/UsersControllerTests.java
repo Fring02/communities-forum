@@ -1,4 +1,4 @@
-package com.cloud.usersservice.unit.controller;
+package com.cloud.usersservice.integration.controller;
 
 import com.cloud.usersservice.controller.UsersController;
 import com.cloud.usersservice.dto.user.UserViewDto;
@@ -26,7 +26,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.is;
@@ -38,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UsersController.class)
 @ActiveProfiles("test")
-public class UsersControllerUnitTests {
+public class UsersControllerTests {
     @Autowired
     private MockMvc mvc;
     @MockBean
@@ -189,7 +188,7 @@ public class UsersControllerUnitTests {
         when(usersService.existsById(UUID.fromString(id))).thenReturn(false);
 
         mvc.perform(get("/api/v1/users/ids=" + id)).andExpect(status().isOk())
-                .andExpect()
+                //.andExpect()
                 .andExpect(r -> r.getResponse().getContentAsString().equals(Boolean.toString(false))).andReturn();
     }
 }
