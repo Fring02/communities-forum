@@ -151,4 +151,26 @@ public class UsersServiceImpl implements UsersService {
         rabbitTemplate.convertAndSend(exchangeName, new NotificationMessageDto(
                 subscriptionDto.getUserId(), subscriber.getUserName() + " has subscribed to you"));
     }
+
+    @Override
+    @Transactional
+    public void unsubscribe(SubscriptionDto subscriptionDto) throws EntityNotFoundException, IllegalArgumentException {
+        Objects.requireNonNull(subscriptionDto);
+        if(!StringUtils.hasLength(subscriptionDto.getUserId()) || !StringUtils.hasLength(subscriptionDto.getSubscriberId()))
+            throw new IllegalArgumentException("User or subscriber ids are invalid");
+
+        User user = repository.findById(UUID.fromString(subscriptionDto.getUserId()))
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + subscriptionDto.getUserId() + " not found"));
+        User subscriber = repository.findById(UUID.fromString(subscriptionDto.getSubscriberId()))
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + subscriptionDto.getSubscriberId() + " not found"));
+
+        logger.info("Unsubscription process: fetching user " + subscriptionDto.getUserId()
+                + " and user-subscriber " + subscriptionDto.getSubscriberId());
+
+        user.getSubscribers().remove(subscriber);
+        subscriber.getSubscriberOf().remove(user);
+
+        repository.saveAll(List.of(user, subscriber));
+        logger.info(String.format("Unsubscription of user %s to user %s successful", subscriptionDto.getUserId(), subscriptionDto.getSubscriberId()));
+    }
 }

@@ -1,8 +1,10 @@
 package com.cloud.usersservice.integration.service;
 
 import com.cloud.usersservice.UsersServiceApplication;
+import com.cloud.usersservice.dto.subscribe.SubscriptionDto;
 import com.cloud.usersservice.dto.user.UserCreateDto;
 import com.cloud.usersservice.dto.user.UserCreatedDto;
+import com.cloud.usersservice.dto.user.UserKarmaDto;
 import com.cloud.usersservice.dto.user.UserUpdateDto;
 import com.cloud.usersservice.entity.User;
 import com.cloud.usersservice.repository.UsersRepository;
@@ -10,6 +12,7 @@ import com.cloud.usersservice.service.UsersService;
 import com.netflix.discovery.converters.Auto;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,6 +34,7 @@ import static org.junit.jupiter.api.Assumptions.*;
 public class UsersServiceTests {
     private static List<String> testUserRoles = List.of("user");
     private static UUID testId;
+    private static UUID subscriberId;
     @Autowired
     private UsersService usersService;
     @Autowired
@@ -56,7 +60,13 @@ public class UsersServiceTests {
         user.setRoles(testUserRoles);
         user = repository.save(user);
         testId = user.getId();
-        repository.saveAll(testUsers);
+        testUsers = repository.saveAll(testUsers);
+
+        subscriberId = testUsers.get(0).getId();
+        var subDto = new SubscriptionDto();
+        subDto.setSubscriberId(String.valueOf(subscriberId));
+        subDto.setUserId(String.valueOf(testId));
+        usersService.unsubscribe(subDto);
     }
     @Test
     public void test_find_all() {
@@ -193,5 +203,48 @@ public class UsersServiceTests {
     public void test_update_user_throws_IAE(){
         UserUpdateDto dto = new UserUpdateDto();
         assertThrows(IllegalArgumentException.class, () -> usersService.update(dto));
+    }
+    @Test
+    public void test_update_user_throws_ENFE(){
+        var userDto = new UserUpdateDto();
+        userDto.setId(UUID.randomUUID());
+        assertThrows(EntityNotFoundException.class, () -> usersService.update(userDto));
+    }
+    @Test
+    public void test_subscribe_throws_NPE(){
+        SubscriptionDto dto = null;
+        assertThrows(NullPointerException.class, () -> usersService.subscribe(dto));
+    }
+    @Test
+    public void test_subscribe_throws_IAE(){
+        SubscriptionDto dto = new SubscriptionDto();
+        dto.setSubscriberId("");
+        assertThrows(IllegalArgumentException.class, () -> usersService.subscribe(dto));
+        dto.setUserId("random_username");
+        assertThrows(IllegalArgumentException.class, () -> usersService.subscribe(dto));
+    }
+    @Test
+    public void test_subscribe_throws_ENFE(){
+        SubscriptionDto dto = new SubscriptionDto();
+        dto.setSubscriberId(UUID.randomUUID().toString());
+        dto.setUserId(UUID.randomUUID().toString());
+        assertThrows(EntityNotFoundException.class, () -> usersService.subscribe(dto));
+    }
+    @Test
+    public void test_subscribe_works(){
+        SubscriptionDto dto = new SubscriptionDto();
+        User user = repository.findById(testId).get();
+        int oldKarma = user.getKarma();
+        dto.setSubscriberId(String.valueOf(subscriberId));
+        dto.setUserId(String.valueOf(testId));
+        usersService.subscribe(dto);
+
+        user = repository.findById(testId).get();
+        int newKarma = user.getKarma();
+        assertTrue(oldKarma < newKarma);
+        assertFalse(repository.findBySubscribersForId(testId).isEmpty() &&
+                repository.findBySubscribersForId(testId).get().getSubscribers().isEmpty());
+        assertFalse(repository.findBySubscriberOfForId(subscriberId).isEmpty() &&
+                repository.findBySubscriberOfForId(subscriberId).get().getSubscriberOf().isEmpty());
     }
 }

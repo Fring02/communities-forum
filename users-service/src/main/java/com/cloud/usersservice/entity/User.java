@@ -1,10 +1,13 @@
 package com.cloud.usersservice.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Check;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -48,13 +51,18 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "roles")
     private List<String> roles;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(name = "users_subscribers", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "sub_id"))
     private List<User> subscribers;
-    @ManyToMany(mappedBy = "subscribers", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "subscribers", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<User> subscriberOf;
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof User user)) return false;
         return user.userName.equals(this.userName) && user.email.equals(this.email);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getUserName(), getKarma(), getRoles(), getSubscribers(), getSubscriberOf());
     }
 }

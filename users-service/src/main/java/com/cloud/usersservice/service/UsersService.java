@@ -14,4 +14,5 @@ public interface UsersService extends CrudService<UUID, UserViewDto, UserFullVie
     Collection<UserViewDto> getByIds(Collection<UUID> ids);
     Optional<UserWithRolesDto> getRolesByUsername(String username);
     void subscribe(SubscriptionDto subscriptionDto) throws EntityNotFoundException, IllegalArgumentException;
+    void unsubscribe(SubscriptionDto subscriptionDto) throws EntityNotFoundException, IllegalArgumentException;
 }
