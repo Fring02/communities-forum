@@ -16,11 +16,15 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +43,10 @@ public class UsersServiceTests {
     private UsersService usersService;
     @Autowired
     private UsersRepository repository;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+    @Value("${notifications.exchange.name}")
+    private String exchangeName;
     @BeforeEach
     public void setUp() {
         repository.deleteAll();
@@ -246,5 +254,9 @@ public class UsersServiceTests {
                 repository.findBySubscribersForId(testId).get().getSubscribers().isEmpty());
         assertFalse(repository.findBySubscriberOfForId(subscriberId).isEmpty() &&
                 repository.findBySubscriberOfForId(subscriberId).get().getSubscriberOf().isEmpty());
+
+        Message message = rabbitTemplate.receive(exchangeName);
+        assertNotNull(message);
+        assertTrue(new String(message.getBody(), StandardCharsets.UTF_8).contains(" has subscribed to you"));
     }
 }
