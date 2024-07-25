@@ -41,7 +41,7 @@ public class UsersController {
             int page = pageOpt.get(), pageCount = pageCountOpt.get();
             if(page <= 0 || pageCount <= 0) return ResponseEntity.badRequest().body("Page or page count must be greater than 0");
             var users = service.getAll(page, pageCount);
-            return ResponseEntity.ok(new UsersPageDto(users.toList(), users.getTotalElements(), users.getTotalPages()));
+            return ResponseEntity.ok(new UsersPageDto(users.toList(), users.getTotalElements(), page));
         }
         var users = service.getAll();
         int usersCount = users.size();
