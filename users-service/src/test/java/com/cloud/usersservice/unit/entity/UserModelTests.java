@@ -40,7 +40,7 @@ public class UserModelTests {
     }
 
     @Test
-    public void should_return_false_for_user_equals_if_users_are_the_same(){
+    public void should_return_false_for_user_equals_if_users_are_not_the_same(){
         //Arrange
         userCopy = new User();
         userCopy.setUserName("frik02");
